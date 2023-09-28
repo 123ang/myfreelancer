@@ -1,0 +1,46 @@
+.hero-section{
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: $hero-height;
+    background-color: lavender;
+    background: url(../../assets/images/misc/hero-01.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    &::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgb( 255 255 255 / .35);
+        z-index: 0;
+    }
+
+    .title-container{
+        position: relative;
+        max-width: 750px;
+        text-align: justify;
+
+        h1{
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        h4{
+            font-size: 1.15rem;
+        }        
+
+        .hero-button-container{
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+    }
+}

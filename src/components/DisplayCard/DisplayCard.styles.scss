@@ -1,0 +1,42 @@
+.card-container{
+    padding: 1.5rem .5rem;
+
+    .card{
+        background-color: #fff;
+        box-shadow: $shadow-1;
+        border-radius: $radius-1;
+        padding: 1rem;
+        flex-wrap: wrap;
+
+        .skill-container{
+            display: flex;
+            gap: .5rem 1rem;
+            margin-block: .75rem;
+
+            .badge{
+                padding: .15rem .5rem;
+                border-radius: 500px;
+                border: 1px solid $font-main;
+                color: $font-main;
+                opacity: .75;
+            }
+        }
+
+        .button-container{
+            text-align: center;
+            padding: 0rem 1rem;
+
+            .button{
+                width: fit-content;
+                margin-inline: auto;
+                padding: .5rem 1.5rem;
+                border-radius: $radius-1;
+                border: 1px solid $font-main;
+
+                &:hover{
+                    color: $font-main;
+                }
+            }
+        }                
+    }    
+}

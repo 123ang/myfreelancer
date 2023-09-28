@@ -1,0 +1,41 @@
+.upload-project-section{
+    min-height: $project-bar-height;
+    background-color: $main-1;
+    padding: 1.5rem 1rem;
+
+    *{ color: #fff }
+
+    .container{
+        height: 100%;
+
+        h4{ font-size: 1.5rem; font-weight: 500; }
+        h5{ font-size: 1.25rem; font-weight: 500; }
+
+        .text-container{
+            text-align: left;
+            @media screen and (max-width: 768px) {
+                text-align: center;
+            }
+        }
+
+        .project-button{
+            a {
+                margin-left: auto;
+                @media screen and (max-width: 768px) {
+                    margin-inline: auto;
+                }
+
+                .button{
+                    padding: .75rem 1.75rem;
+                    border: 2px solid #fff;
+                    border-radius: $radius-1;
+                    transition: background .3s ease;
+
+                    &:hover{
+                        background-color: $main-3;
+                    }
+                }
+            }
+        }
+    }
+}

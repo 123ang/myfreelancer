@@ -1,0 +1,153 @@
+.body-section{
+    background-color: $main-4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: 125px 75px;
+
+    .login-card{
+        background-color: #fff;
+        margin-block: auto;
+        width: 90%;
+        max-width: 700px;
+        border-radius: $radius-1;
+        padding: 1.75rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: $shadow;
+
+        h2{font-weight: 700;}
+
+        .login-form-container{
+            position: relative;
+            pointer-events: initial;
+            padding-block: 1.5rem;
+            width: 100%;
+            max-width: 500px;
+            margin-inline: auto;
+
+            label{
+                padding-left: 1.25rem;
+                margin-bottom: .5rem;
+                font-weight: 600;
+                letter-spacing: .1rem;
+            }
+            
+            input, select{
+                letter-spacing: .1rem;
+                border: 2px solid $font-main;
+                border-radius: $radius-1;
+                width: 100%;
+                padding: .5rem 1rem;
+                color: $font-main;
+                font-weight: 500;
+
+                &::placeholder{
+                    color: rgb(0 0 0 / .5);
+                }
+            }
+
+            .gender-checkbox{
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                
+                label, input{
+                    margin: 0;
+                    padding: 0;
+                    width: fit-content;
+                    cursor: pointer;
+                }
+            }
+
+            &.tnc-checkbox{
+                display: flex;
+
+                input{
+                    width: fit-content !important;
+                }
+
+                .tnc-label{
+                    margin: 0;
+                    user-select: none;
+                    
+                    a{text-decoration: underline;}
+                }
+            }
+
+            .password-input{
+                position: relative;
+                border-radius: $radius-1;
+                overflow: hidden;
+
+                input, select{
+                    padding-right: 3rem;
+                }
+
+                .show-password{
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    padding: .25rem 1.5rem .25rem 1rem;
+                    cursor: pointer;
+
+                    i{
+                        color: $font-main;
+                    }
+                }
+            }
+
+            .remember-me{
+                user-select: none;
+                margin-top: .35rem;
+
+                label{
+                    display: flex;
+                    input{
+                        width: auto;
+                        margin-right: 10px;
+                    }
+                }
+            }
+
+            .button-main.login{
+                color: #fff;
+                font-weight: 700;
+                border-radius: $radius-1;
+                background-color: $main-1;
+                margin-inline: auto;
+                width: 100%;
+                max-width: 200px;
+                padding: .75rem 2rem;
+                transition: background-color .3s $ease-1;
+
+                &:hover{
+                    background-color: $main-2;
+                }
+            }
+        }
+
+        .login-form-footer{
+            pointer-events: initial;
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+
+            .link{
+                padding-inline: 2rem;
+                border-right: 1px solid $font-main;
+                text-align: center;
+                
+                &:last-child{
+                    border-right: 0;
+                }
+
+                a{color: $font-main;}
+            }
+        }
+    }
+}
