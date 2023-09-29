@@ -13,7 +13,7 @@ const vuexPersist = new VuexPersistence<MyState>({
 
 export default createStore({
   state: {
-    host_url: "http://127.0.0.1:8000/api/",
+    host_url: "https://backend.myfreelancer.com.my/api/",
     is_login: false,
     remember_boolean: false,
     remember_password: "",
