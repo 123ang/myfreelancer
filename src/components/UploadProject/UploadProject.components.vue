@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row w-100 align-items-center d-flex">
                 <div class="col-lg-8 text-container my-2">
-                    <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </h4>
+                    <h4>Post Your Project & Find Talent. </h4>
                 </div>
                 <div class="col-lg-4 d-flex project-button my-2">
                     <a href="#" class="">

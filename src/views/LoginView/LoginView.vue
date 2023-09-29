@@ -40,18 +40,64 @@
 
     </div>
 </template>
-
 <script lang="ts">
-import { defineComponent } from 'vue'
-
+import { defineComponent, ref, onMounted  } from 'vue';
+import { useStore } from 'vuex';
+import axios from 'axios';
 
 export default defineComponent({
     name: 'LoginView',
-    components: {},
+    setup() {
+        const store = useStore();
+        const email = ref('');
+        const password = ref('');
+        const remember = ref(false);
+        onMounted(() => {
+            store.commit('IsLogin', false);
+        });
+
+        const handleLogin = async () => {
+            try {
+                const response = await axios.post(store.state.host_url + 'user/login', {
+                    email: email.value,
+                    password: password.value
+                });
+                
+                if (response.data.success) {
+                    store.commit('IsLogin', true);
+                    store.commit('Username', response.data.email);  // Assuming that the response contains the email
+                    store.commit('UserID', response.data.id);  // Assuming that the response contains the user ID
+
+                    // If the "Remember Me" checkbox is ticked, save the details
+                    if (remember.value) {
+                        store.commit('RememberBoolean', true);
+                        store.commit('RememberUsername', email.value);
+                        store.commit('RememberPassword', password.value);
+                    } else {
+                        store.commit('RememberBoolean', false);
+                        store.commit('RememberUsername', '');
+                        store.commit('RememberPassword', '');
+                    }
+                } else {
+                    alert('Login failed!');
+                }
+            } catch (error) {
+                console.error('Error logging in:', error);
+                alert('An error occurred while logging in. Please try again.');
+            }
+        }
+
+        return {
+            email,
+            password,
+            remember,
+            handleLogin
+        };
+    }
 });
 </script>
 
 <style lang="scss" scoped>
-  @import '@/assets/styles/global.styles.scss';
-  @import './LoginView.styles.scss';
+    @import '@/assets/styles/global.styles.scss';
+    @import './LoginView.styles.scss';
 </style>

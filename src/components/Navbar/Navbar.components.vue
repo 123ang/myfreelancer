@@ -6,10 +6,15 @@
       </a>
       <div :class="{'nav-link-container':true, active: isMenuToggle}">
         <div class="link close-button" @click="closeMenu"><i class="fas fa-times"></i></div>
-        <a href="/my-project" class="link">PROJECT</a>          
-        <a href="/my-account" class="link">ACCOUNT</a>          
-        <a href="#logout" class="link">LOGOUT</a>          
-        <a href="/login" class="link">LOGIN</a>          
+          <div v-if="isLogin">
+            <a href="/my-project" class="link">PROJECT</a>          
+            <a href="/my-account" class="link">ACCOUNT</a>   
+            <a href="#logout" class="link">LOGOUT</a>
+          </div>
+          <div v-else>
+            <a href="/register" class="link">REGISTER</a>         
+            <a href="/login" class="link">LOGIN</a>         
+          </div>
       </div>
       <div :class="{'language-container': true, active: isLanguageActive}" @click="toggleLanguage">
         <div class="language-icon"><i class="bi bi-translate"></i></div>
@@ -24,14 +29,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-
+import { defineComponent, ref,computed  } from 'vue';
+import { useStore } from 'vuex';
 export default defineComponent({
   name: 'Navbar',
   props: {},
   setup() {
     const isLanguageActive = ref<boolean>(false);
     const isMenuToggle = ref<boolean>(false);
+    const store = useStore();
+    const isLogin = computed(() => store.state.is_login);
 
     // toggle language box
     const toggleLanguage = (e:MouseEvent):void => {
@@ -58,6 +65,7 @@ export default defineComponent({
       isMenuToggle,
       toggleMenu,
       closeMenu,
+      isLogin
     }
   }
 });
