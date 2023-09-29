@@ -149,7 +149,7 @@ export default defineComponent({
             }
 
             const apiUrl = store.state.host_url + "user/register";  // Concatenate host_url with endpoint
-             try {
+            try {
         
                 const response = await axios.post(apiUrl, formData.value);
                 console.log(response.data);
