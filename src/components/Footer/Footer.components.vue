@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="container">
-        <div class="">copyright</div>
+        <div class="">MyFreeLancera@  {{ (new Date()).getFullYear() }} Managed by Sun Tzu Technologies 202303126583 (003494178-T)</div>
     </div>
   </footer>
 </template>
