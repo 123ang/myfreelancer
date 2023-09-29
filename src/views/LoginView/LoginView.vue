@@ -4,25 +4,25 @@
             <h2 class="mb-4 text-center">LOGIN</h2>
 
             <div class="form-container">
-                <form action="">
+                <form @submit.prevent="handleLogin">
                     <div class="login-form-container">                  
                         <label for="email">Email:</label>
-                        <input type="email" name="email" id="email" placeholder="Email">
+                        <input type="email" v-model="email" name="email" id="email" placeholder="Email">
                     </div>
 
                     <div class="login-form-container">               
                         <label for="password">Password:</label>
                         <div class="password-input">
                             <div class="show-password"><i class="bi bi-eye-fill"></i></div>
-                            <input type="password" name="password" id="password" placeholder="Password">
+                            <input type="password" v-model="password" name="password" id="password" placeholder="Password">
                         </div>
                         <div class="remember-me">                    
-                            <label><input type="checkbox" name="remember" id="remember">Remember Me</label>
+                            <label><input type="checkbox" v-model="remember" name="remember" id="remember">Remember Me</label>
                         </div>
                     </div>
 
                     <div class="login-form-container text-center">
-                        <button class="button-main login">Login</button>
+                        <button class="button-main login" type="submit">Login</button>
                     </div>
                 </form>
 
@@ -40,10 +40,12 @@
 
     </div>
 </template>
+
 <script lang="ts">
 import { defineComponent, ref, onMounted  } from 'vue';
 import { useStore } from 'vuex';
 import axios from 'axios';
+import { useRouter } from 'vue-router'; 
 
 export default defineComponent({
     name: 'LoginView',
@@ -52,22 +54,31 @@ export default defineComponent({
         const email = ref('');
         const password = ref('');
         const remember = ref(false);
+        const router = useRouter();
         onMounted(() => {
             store.commit('IsLogin', false);
+            console.log(store.state.remember_boolean)
+            if (store.state.remember_boolean) {
+                email.value = store.state.remember_username;
+                password.value = store.state.remember_password;
+                remember.value = true;  // To auto-check the 'Remember Me' checkbox
+            }
         });
 
         const handleLogin = async () => {
+            console.log(email.value)
+            console.log(password.value)
             try {
                 const response = await axios.post(store.state.host_url + 'user/login', {
                     email: email.value,
                     password: password.value
                 });
-                
-                if (response.data.success) {
+                console.log(response.data)
+                if (response.data.message == 'Login successful!') {
                     store.commit('IsLogin', true);
                     store.commit('Username', response.data.email);  // Assuming that the response contains the email
                     store.commit('UserID', response.data.id);  // Assuming that the response contains the user ID
-
+                    
                     // If the "Remember Me" checkbox is ticked, save the details
                     if (remember.value) {
                         store.commit('RememberBoolean', true);
@@ -78,6 +89,7 @@ export default defineComponent({
                         store.commit('RememberUsername', '');
                         store.commit('RememberPassword', '');
                     }
+                    router.push('/login'); 
                 } else {
                     alert('Login failed!');
                 }

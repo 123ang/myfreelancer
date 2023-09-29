@@ -9,7 +9,7 @@
           <div v-if="isLogin">
             <a href="/my-project" class="link">PROJECT</a>          
             <a href="/my-account" class="link">ACCOUNT</a>   
-            <a href="#logout" class="link">LOGOUT</a>
+            <a href="#logout" @click="logout" class="link">LOGOUT</a>
           </div>
           <div v-else>
             <a href="/register" class="link">REGISTER</a>         
@@ -31,6 +31,7 @@
 <script lang="ts">
 import { defineComponent, ref,computed  } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 export default defineComponent({
   name: 'Navbar',
   props: {},
@@ -39,7 +40,7 @@ export default defineComponent({
     const isMenuToggle = ref<boolean>(false);
     const store = useStore();
     const isLogin = computed(() => store.state.is_login);
-
+    const router = useRouter();
     // toggle language box
     const toggleLanguage = (e:MouseEvent):void => {
       e.stopPropagation();
@@ -56,7 +57,12 @@ export default defineComponent({
       e.stopPropagation();
       isMenuToggle.value = false;
     }
-    
+
+    const logout = (e: MouseEvent): void => {
+        e.preventDefault();
+        store.commit('IsLogin', false); // Setting is_login to false
+        router.push('/login'); // Redirecting to the login page
+    };
     // 
 
     return{ 
@@ -65,6 +71,7 @@ export default defineComponent({
       isMenuToggle,
       toggleMenu,
       closeMenu,
+      logout,
       isLogin
     }
   }
