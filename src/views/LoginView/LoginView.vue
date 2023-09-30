@@ -76,8 +76,8 @@ export default defineComponent({
                 console.log(response.data)
                 if (response.data.message == 'Login successful!') {
                     store.commit('IsLogin', true);
-                    store.commit('Username', response.data.email);  // Assuming that the response contains the email
-                    store.commit('UserID', response.data.id);  // Assuming that the response contains the user ID
+                    store.commit('Username', response.data.user.email);  // Assuming that the response contains the email
+                    store.commit('UserID', response.data.user.ID);  // Assuming that the response contains the user ID
                     
                     // If the "Remember Me" checkbox is ticked, save the details
                     if (remember.value) {
@@ -89,7 +89,7 @@ export default defineComponent({
                         store.commit('RememberUsername', '');
                         store.commit('RememberPassword', '');
                     }
-                    router.push('/login'); 
+                    router.push('/'); 
                 } else {
                     alert('Login failed!');
                 }
