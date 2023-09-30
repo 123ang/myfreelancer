@@ -34,9 +34,10 @@ const routes: Array<RouteRecordRaw> = [
     component: MyProjectView
   },
   {
-    path: '/project-view-:id',
-    name: 'project_view',
-    component: ProjectView
+    path: '/project/:id',
+    name: 'ProjectView',
+    component: ProjectView,
+    props: true // This ensures that the `:id` parameter is passed as a prop to the ProjectView component
   },
   {
     path: '/create-project',
