@@ -7,20 +7,21 @@
       <div :class="{'nav-link-container':true, active: isMenuToggle}">
         <div class="link close-button" @click="closeMenu"><i class="fas fa-times"></i></div>
           <div v-if="isLogin">
-            <a href="/my-project" class="link">PROJECT</a>          
-            <a href="/my-account" class="link">ACCOUNT</a>   
-            <a href="#logout" @click="logout" class="link">LOGOUT</a>
+            <a href="/my-project" class="link">{{ $t('message.project') }}</a>
+            <a href="/my-account" class="link">{{ $t('message.account') }}</a>
+            <a @click="logout" class="link">{{ $t('message.logout') }}</a>
           </div>
           <div v-else>
-            <a href="/register" class="link">REGISTER</a>         
-            <a href="/login" class="link">LOGIN</a>         
+            <a href="/register" class="link">{{ $t('message.register') }}</a>         
+            <a href="/login" class="link">{{ $t('message.login') }}</a>         
           </div>
       </div>
       <div :class="{'language-container': true, active: isLanguageActive}" @click="toggleLanguage">
         <div class="language-icon"><i class="bi bi-translate"></i></div>
         <div class="language-box">
-          <div class="language-option active">English</div>
-          <div class="language-option ">Bahasa Melayu</div>
+          <div class="language-option active" @click="changeLanguage('en')">English</div>
+          <div class="language-option" @click="changeLanguage('bm')">Bahasa Melayu</div>
+          <div class="language-option" @click="changeLanguage('cn')">中文</div>
         </div>
       </div>
       <div class="mobile-menu" @click="toggleMenu"><i class="fas fa-bars"></i></div>
@@ -63,7 +64,10 @@ export default defineComponent({
         store.commit('IsLogin', false); // Setting is_login to false
         router.push('/login'); // Redirecting to the login page
     };
-    // 
+    
+    const changeLanguage = (lang: string): void => {
+      store.commit('Language', lang);
+    };
 
     return{ 
       isLanguageActive, 
@@ -72,7 +76,8 @@ export default defineComponent({
       toggleMenu,
       closeMenu,
       logout,
-      isLogin
+      isLogin,
+      changeLanguage
     }
   }
 });

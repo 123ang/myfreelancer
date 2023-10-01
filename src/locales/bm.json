@@ -1,0 +1,9 @@
+{
+    "message": {
+        "project": "PROJEK",
+        "account": "AKAUN",
+        "logout": "LOG KELUAR",
+        "register": "DAFTAR",
+        "login": "LOG MASUK"
+    }
+}

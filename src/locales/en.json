@@ -1,0 +1,9 @@
+{
+    "message": {
+        "project": "PROJECT",
+        "account": "ACCOUNT",
+        "logout": "LOGOUT",
+        "register": "REGISTER",
+        "login": "LOGIN"
+    }
+}
