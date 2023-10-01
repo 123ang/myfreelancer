@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar-container ">
+  <div class="navbar-container"  :key="dynamicComponent">
     <div class="container">
       <a href="/" class="logo">
         <img src="@/assets/images/logo.png" alt="logo" loading="lazy" height="40">
@@ -30,58 +30,63 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref,computed  } from 'vue';
+import { defineComponent, ref, computed  } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { i18n } from "@/main";
+
 export default defineComponent({
   name: 'Navbar',
-  props: {},
   setup() {
     const isLanguageActive = ref<boolean>(false);
     const isMenuToggle = ref<boolean>(false);
     const store = useStore();
     const isLogin = computed(() => store.state.is_login);
     const router = useRouter();
-    // toggle language box
-    const toggleLanguage = (e:MouseEvent):void => {
+    const dynamicComponent = ref('div');
+    const forceUpdate = ref(0);
+    const toggleLanguage = (e: MouseEvent): void => {
       e.stopPropagation();
       isLanguageActive.value = !isLanguageActive.value;
     };
 
-    // toggle out mobile menu
-    const toggleMenu = (e:MouseEvent):void => {
+    const toggleMenu = (e: MouseEvent): void => {
       e.stopPropagation();
-      isMenuToggle.value = true;
-    }
+      isMenuToggle.value = !isMenuToggle.value;
+    };
 
-    const closeMenu = (e:MouseEvent):void =>{
+    const closeMenu = (e: MouseEvent): void => {
       e.stopPropagation();
       isMenuToggle.value = false;
-    }
+    };
 
     const logout = (e: MouseEvent): void => {
-        e.preventDefault();
-        store.commit('IsLogin', false); // Setting is_login to false
-        router.push('/login'); // Redirecting to the login page
-    };
-    
-    const changeLanguage = (lang: string): void => {
-      store.commit('Language', lang);
+      e.preventDefault();
+      store.commit('IsLogin', false);
+      router.push('/login');
     };
 
-    return{ 
-      isLanguageActive, 
+    const changeLanguage = (lang: string): void => {
+    
+
+      store.commit('Language', lang);
+      (i18n as any).global.locale = lang;
+      window.location.reload();
+    };
+  
+    return {
+      isLanguageActive,
       toggleLanguage,
       isMenuToggle,
       toggleMenu,
       closeMenu,
       logout,
       isLogin,
-      changeLanguage
-    }
+      changeLanguage,
+      dynamicComponent
+    };
   }
 });
-
 </script>
 
 <style lang="scss" scoped>
