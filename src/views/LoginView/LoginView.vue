@@ -56,7 +56,7 @@ export default defineComponent({
         const remember = ref(false);
         const router = useRouter();
         onMounted(() => {
-            store.commit('HostUrl', 'https://backend.myfreelancer.com.my/');      
+            store.commit('HostUrl', 'https://backend.myfreelancer.com.my/api/');      
             store.commit('IsLogin', false);
             console.log(store.state.remember_boolean)
             if (store.state.remember_boolean) {
