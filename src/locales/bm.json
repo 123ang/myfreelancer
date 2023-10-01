@@ -4,6 +4,11 @@
         "account": "AKAUN",
         "logout": "LOG KELUAR",
         "register": "DAFTAR",
-        "login": "LOG MASUK"
+        "login": "LOG MASUK",
+        "MyFreeLancer": "MyFreeLancer",
+        "MyFreeLancer is a dynamic platform connecting talented freelancers with businesses and individuals seeking specialized skills": "MyFreeLancer adalah platform dinamik yang menghubungkan pekerja bebas berbakat dengan perniagaan dan individu yang mencari kemahiran khusus.",
+        "GET A FREELANCER": "DAPATKAN PEKERJA BEBAS",
+        "START TO EARN MONEY": "MULA MENJANA WANG"
+
     }
 }

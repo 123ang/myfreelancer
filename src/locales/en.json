@@ -4,6 +4,10 @@
         "account": "ACCOUNT",
         "logout": "LOGOUT",
         "register": "REGISTER",
-        "login": "LOGIN"
+        "login": "LOGIN",
+        "MyFreeLancer": "MyFreeLancer",
+        "MyFreeLancer is a dynamic platform connecting talented freelancers with businesses and individuals seeking specialized skills": "MyFreeLancer is a dynamic platform connecting talented freelancers with businesses and individuals seeking specialized skills.",
+        "GET A FREELANCER": "GET A FREELANCER",
+        "START TO EARN MONEY": "START TO EARN MONEY"
     }
 }
