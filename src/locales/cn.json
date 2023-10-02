@@ -33,6 +33,15 @@
         "latestProjectDescription": "如需查看任何项目的详细信息，请点击“查看更多”。如果您有兴趣在此部分发布您的项目，请通过angjinsheng@gmail.com与我们联系。",
         "noProjectTitle": "没有最新的项目",
         "noProjectDescription": "请创建您自己的项目",
-        "viewMore": "查看更多"
+        "viewMore": "查看更多",
+        "projectTitle": "项目标题",
+        "projectDescription": "项目描述",
+        "projectBudget": "项目预算",
+        "category": "类别",
+        "requireSkill": "所需技能",
+        "add": "添加",
+        "noSkillRequirement": "无技能要求",
+        "personInCharge": "负责人",
+        "Create": "创建"
     }
 }

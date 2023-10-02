@@ -33,6 +33,15 @@
         "latestProjectDescription": "Untuk maklumat terperinci mengenai mana-mana projek, sila klik 'Lihat Lagi'. Jika anda berminat untuk mengiklankan projek anda di bahagian ini, sila hubungi kami di angjinsheng@gmail.com.",
         "noProjectTitle": "Tiada Projek Terkini",
         "noProjectDescription": "Sila cipta projek anda sendiri",
-        "viewMore": "LIHAT LAGI"
+        "viewMore": "LIHAT LAGI",
+        "projectTitle": "Tajuk Projek",
+        "projectDescription": "Penerangan Projek",
+        "projectBudget": "Bajet Projek",
+        "category": "Kategori",
+        "requireSkill": "Kemahiran Diperlukan",
+        "add": "Tambah",
+        "noSkillRequirement": "Tiada keperluan kemahiran",
+        "personInCharge": "Orang Bertanggungjawab",
+        "Create": "Cipta"
     }
 }
