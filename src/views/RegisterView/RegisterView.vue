@@ -170,7 +170,7 @@ export default defineComponent({
         onMounted(()=>{
             body = document.querySelector('body')!;     
             tncModal = document.querySelector('#tnc-display')!;
-            store.commit('HostUrl', 'https://backend.myfreelancer.com.my/');                   
+            store.commit('HostUrl', 'https://backend.myfreelancer.com.my/api/');                   
         });
 
     
