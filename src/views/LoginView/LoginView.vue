@@ -1,39 +1,39 @@
 <template>
     <div class="body-section" id="login">
         <div class="login-card">
-            <h2 class="mb-4 text-center">LOGIN</h2>
+            <h2 class="mb-4 text-center">{{ $t('message.login') }}</h2>
 
             <div class="form-container">
                 <form @submit.prevent="handleLogin">
                     <div class="login-form-container">                  
-                        <label for="email">Email:</label>
-                        <input type="email" v-model="email" name="email" id="email" placeholder="Email">
+                        <label for="email">{{ $t('message.Email') }}</label>
+                        <input type="email" v-model="email" name="email" id="email" :placeholder="$t('message.Email')">
                     </div>
 
                     <div class="login-form-container">               
-                        <label for="password">Password:</label>
+                        <label for="password">{{ $t('message.Password') }}</label>
                         <div class="password-input">
-                            <div class="show-password"><i class="bi bi-eye-fill"></i></div>
-                            <input type="password" v-model="password" name="password" id="password" placeholder="Password">
+                            <input type="password" v-model="password" name="password" id="password" :placeholder="$t('message.Password')">
                         </div>
                         <div class="remember-me">                    
-                            <label><input type="checkbox" v-model="remember" name="remember" id="remember">Remember Me</label>
+                            <label><input type="checkbox" v-model="remember" name="remember" id="remember">{{ $t('message.rememberMe') }}</label>
                         </div>
                     </div>
 
                     <div class="login-form-container text-center">
-                        <button class="button-main login" type="submit">Login</button>
+                        <button class="button-main login" type="submit">{{ $t('message.login') }}</button>
                     </div>
                 </form>
 
                 <div class="login-form-footer">
                     <div class="link">                  
-                        <a href="/forget-password">Forget Password?</a>                  
+                        <a href="/forget-password">{{ $t('message.Forget Password?') }}</a>                  
                     </div>
                     <div class="link">
-                        <a href="/register">Create an Account</a>
+                        <a href="/register">{{ $t('message.Create an Account') }}</a>
                     </div>
                 </div>
+
             </div>
 
         </div>

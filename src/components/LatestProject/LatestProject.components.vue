@@ -1,40 +1,41 @@
 <template>
-    <section id="latest-project">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="title">Latest Project</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper feugiat tortor, id ornare odio blandit vel. Donec sagittis ante in lectus convallis, sit amet. </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+  <section id="latest-project">
+      <div class="container">
+          <div class="text-center mb-5">
+              <h2 class="title">{{$t('message.latestProject')}}</h2>
+              <p>{{$t('message.latestProjectDescription')}}</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
 
-                <!-- card -->
-                <DisplayCard v-if="cardDatas.length > 0" :CardDatas="cardDatas" />
+              <!-- card -->
+              <DisplayCard v-if="cardDatas.length > 0" :CardDatas="cardDatas" />
 
-                <!-- If there is no latest project -->
-                <div v-else class="card-container null">
-                  <div class="card">
-                      <div class="button">
-                        <h4>No Latest Project</h4>
-                        <p>Press View More to Search for more project</p>
-                      </div>
-                  </div>
+              <!-- If there is no latest project -->
+              <div v-else class="card-container null">
+                <div class="card">
+                    <div class="button">
+                      <h4>{{$t('message.noProjectTitle')}}</h4>
+                      <p>{{$t('message.noProjectDescription')}}</p>
+                    </div>
                 </div>
+              </div>
 
-                <!-- VIEW MORE CARD -->
-                <div class="card-container view-more">
-                  <div class="card">
-                    <a href="#view-more">
-                      <div class="button">
-                        <h4>VIEW MORE</h4>
-                      </div>
-                    </a>
-                  </div>
+              <!-- VIEW MORE CARD -->
+              <div class="card-container view-more">
+                <div class="card">
+                  <a href="#view-more">
+                    <div class="button">
+                      <h4>{{$t('message.viewMore')}}</h4>
+                    </div>
+                  </a>
                 </div>
+              </div>
 
-            </div>
-        </div>
-    </section>
+          </div>
+      </div>
+  </section>
 </template>
+
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';

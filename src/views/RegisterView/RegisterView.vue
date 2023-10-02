@@ -1,71 +1,70 @@
 <template>
     <div class="body-section" id="register">
         <div class="login-card">
-            <h2 class="mb-4 text-center">Create An Account</h2>
+            <h2 class="mb-4 text-center">{{ $t('message.register') }}</h2>
 
             <div class="form-container">
                 <form  @submit.prevent="registerUser">
                     <div class="login-form-container">                  
-                        <label for="text">Name:</label>
-                        <input type="text" name="name" id="name" placeholder="First name" v-model="formData.name">
+                        <label for="text">{{ $t('message.Name') }}</label>
+                        <input type="text" name="name" id="name" :placeholder="$t('message.Name')" v-model="formData.name">
                     </div>
 
                     <div class="row login-form-container gy-5 gy-lg-0">
                         <div class="col-lg-6 px-0 px-lg-2">
-                            <label>Gender:</label>
+                            <label>{{ $t('message.Gender') }}</label>
                             <div class="gender-checkbox">
                                 <input type="radio" name="gender" id="male" checked v-model="formData.gender">
-                                <label for="M" class="p-3">Male</label>
+                                <label for="M" class="p-3">{{ $t('message.male') }}</label>
                                 <input type="radio" name="gender" id="female" v-model="formData.gender">
-                                <label for="F" class="p-3">Female</label>
+                                <label for="F" class="p-3">{{ $t('message.female') }}</label>
                             </div>
                         </div>
                         <div class="col-lg-6 px-0 px-lg-2">
-                            <label for="date_of_birth">Date of Birth:</label>
-                            <input type="date" name="dob" id="date_of_birth" placeholder="Date of Birth" v-model="formData.dob">
+                            <label for="date_of_birth">{{ $t('message.Date of Birth') }}</label>
+                            <input type="date" name="dob" id="date_of_birth" :placeholder="$t('message.Date of Birth')" v-model="formData.dob">
                         </div>
                     </div>
 
                     <div class="login-form-container row gy-5 gy-lg-0">
                         <div class="col-lg-6 px-0 px-lg-2">
-                            <label for="email">Email:</label>
-                            <input type="email" name="email" id="email" placeholder="Email" v-model="formData.email">
+                            <label for="email">{{ $t('message.email') }}</label>
+                            <input type="email" name="email" id="email" :placeholder="$t('message.email')" v-model="formData.email">
                         </div>
                         <div class="col-lg-6 px-0 px-lg-2">
-                            <label for="phone">Mobile Number:</label>
-                            <input type="tel" name="phone" id="phone" placeholder="Mobile Number"  v-model="formData.phone">
+                            <label for="phone">{{ $t('message.phone') }}</label>
+                            <input type="tel" name="phone" id="phone" :placeholder="$t('message.phone')" v-model="formData.phone">
                         </div>
                     </div>
 
                     <div class="login-form-container">               
-                        <label for="password">Password:</label>
-                        <input type="password" name="password" id="password" placeholder="Password" v-model="formData.password">
+                        <label for="password">{{ $t('message.password') }}</label>
+                        <input type="password" name="password" id="password" :placeholder="$t('message.password')" v-model="formData.password">
                     </div>
 
                     <div class="login-form-container">               
-                        <label for="password">Confirm Password:</label>
-                        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" v-model="formData.confirm_password">
+                        <label for="password">{{ $t('message.Confirm Password') }}</label>
+                        <input type="password" name="confirm_password" id="confirm_password" :placeholder="$t('message.Confirm Password')" v-model="formData.confirm_password">
                     </div>
 
                     <div class="login-form-container tnc-checkbox">               
                         <input type="checkbox" name="tnc" id="tnc" v-model="formData.tnc">
                         <label for="tnc" class="tnc-label">
-                            TERM AND CONDITION 
-                            <a href="#tnc" class="tnc-link" @click="toggleTnc">LINK</a>
+                            <a href="#tnc" class="tnc-link" @click="toggleTnc">{{ $t('message.termAndCondition') }} </a>
                         </label>
                     </div>
 
                     <div class="login-form-container text-center">
-                        <button class="button-main login">Register</button>
+                        <button class="button-main login">{{ $t('message.register') }}</button>
                     </div>
                 </form>
             </div>
 
             <TncDisplay />
-
         </div>
     </div>
 </template>
+
 
 <script lang="ts">
 import { defineComponent, onMounted, ref  } from 'vue'

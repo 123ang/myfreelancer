@@ -3,12 +3,12 @@
         <div class="container">
             <div class="row w-100 align-items-center d-flex">
                 <div class="col-lg-8 text-container my-2">
-                    <h4>Post Your Project & Find Talent. </h4>
+                    <h4>{{$t('message.postYourProject')}}</h4>
                 </div>
                 <div class="col-lg-4 d-flex project-button my-2">
                     <a href="#" class="">
                         <div class="button">
-                            <h5>UPLOAD PROJECT</h5>
+                            <h5>{{$t('message.uploadProject')}}</h5>
                         </div>
                     </a>
                 </div>
