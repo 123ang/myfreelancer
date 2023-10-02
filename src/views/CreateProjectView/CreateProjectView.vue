@@ -2,42 +2,42 @@
   <div class="body-section">
     <div class="container">
         <div class="card">
-            <h2>Create Project</h2>
+            <h2>{{ $t('message.Create Project') }}</h2>
             <hr>
             <!-- title -->
             <div class="input-container">
-              <label for="project_title">Project Title:</label>
+              <label for="project_title">{{ $t('message.projectTitle') }} :</label>
               <input type="text" id="project_title" name="project_title" v-model="projectTitle">
             </div>
             <!-- description -->
             <div class="input-container">
-              <label for="project_title">Project Description:</label>
+              <label for="project_title">{{ $t('message.projectDescription') }} :</label>
               <textarea id="project_description" name="project_description" rows="5" v-model="projectDescription"></textarea>
             </div>
             <!-- budget -->
             <div class="input-container">
-              <label for="project_budget">Project Budget ( RM ) :</label>
+              <label for="project_budget">{{ $t('message.projectBudget') }} ( RM ) :</label>
               <input type="number" id="project_budget" name="project_budget" min=1 v-model="projectBudget">
             </div>
             <!-- category -->
             <div class="input-container">
-              <label>Category:</label>
+              <label>{{ $t('message.category') }}:</label>
               <select v-model="selectedCategory">
-                <option v-for="category in categories" :value="category.id">{{ category.name_eng }}</option>
+                <option v-for="category in categories" :value="category.ID">{{ category.name_eng }}</option>
               </select>
             </div>
             <!-- skills -->
             <div class="input-container">
-              <label>Require Skill:</label>
+              <label>{{ $t('message.requireSkill') }}:</label>
               <div class="skill-container">
                 <input type="text" class="add-skill-input" v-model="skillInput" @input="filterSkills">
                 <div class="autocomplete-suggestions" v-if="isAutocompleteVisible">
                   <div v-for="skill in filteredSkills" @click="selectSkill(skill)">{{ skill }}</div>
                 </div>
-                <div class="add-skill-button" @click="addSelectedSkill">Add</div>
+                <div class="add-skill-button" @click="addSelectedSkill">{{ $t('message.add') }}</div>
               </div>
               <div class="ms-3 grid grid-cols-1 gap-y-4" id="added-skill">
-                <div v-if="!skillSet.length">No skill requirement</div>
+                <div v-if="!skillSet.length">{{ $t('message.noSkillRequirement') }}</div>
                 <div v-for="(skill, index) in skillSet" class="require-skill">
                   <div class="text-container">{{ skill }}</div>
                   <div class="icon-container delete-button" @click="deleteSkill(index)">
@@ -50,27 +50,28 @@
             <input type="text" id="require_skills" name="require_skills" :value="skillSet.join(',')" hidden>
             
             <div>
-              Person in Charge
+              {{ $t('message.personInCharge') }}
               <div class="input-container">
-                <label for="person_in_charge_name">Name:</label>
+                <label for="person_in_charge_name">{{ $t('message.Name') }}:</label>
                 <input type="text" id="person_in_charge_name" name="person_in_charge_name" v-model="personInChargeName">
               </div>
               <div class="input-container">
-                <label for="person_in_charge_phone">Phone:</label>
+                <label for="person_in_charge_phone">{{ $t('message.phone') }}:</label>
                 <input type="text" id="person_in_charge_phone" name="person_in_charge_phone" v-model="personInChargePhone">
               </div>
               <div class="input-container">
-                <label for="person_in_charge_email">Email:</label>
+                <label for="person_in_charge_email">{{ $t('message.Email') }}:</label>
                 <input type="text" id="person_in_charge_email" name="person_in_charge_email" v-model="personInChargeEmail">
               </div>
             </div>
             <div class="submit-button">
-              <button @click="submitProject">Create</button>
+              <button @click="submitProject">{{ $t('message.Create') }}</button>
             </div>        
         </div>            
     </div>
   </div>
 </template>
+
 
 <script lang="ts">
 

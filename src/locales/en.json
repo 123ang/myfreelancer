@@ -34,7 +34,16 @@
         "latestProjectDescription": "For detailed information on any project, please click 'View More'. If you're interested in advertising your project in this section, kindly reach out to us at angjinsheng@gmail.com.",
         "noProjectTitle": "No Latest Project",
         "noProjectDescription": "Please create your own project",
-        "viewMore": "VIEW MORE"
+        "viewMore": "VIEW MORE",
+        "projectTitle": "Project Title",
+        "projectDescription": "Project Description",
+        "projectBudget":"Project Budget",
+        "category": "Category",
+        "requireSkill": "Require Skill",
+        "add": "Add",
+        "noSkillRequirement": "No skill requirement",
+        "personInCharge": "Person in Charge",
+        "Create": "Create"
       
     }
 }
