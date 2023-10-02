@@ -1,17 +1,17 @@
 <template>
     <div class="body-section" id="forget-password">
         <div class="login-card">
-            <h2 class="mb-4 text-center">Reset Password</h2>
+            <h2 class="mb-4 text-center">{{ $t('message.Reset Password') }}</h2>
 
             <div class="form-container">
                 <form @submit.prevent="resetPassword">
                     <div class="login-form-container">                  
-                        <label for="email">Email:</label>
-                        <input type="email" v-model="email" placeholder="Email">
+                        <label for="email">{{ $t('message.Email') }}</label>
+                        <input type="email" v-model="email" :placeholder="$t('message.Email')">
                     </div>
 
                     <div class="login-form-container text-center">
-                        <button class="button-main login" type="submit">Reset Password</button>
+                        <button class="button-main login" type="submit">{{ $t('message.Reset Password') }}</button>
                     </div>
                 </form>
             </div>
@@ -19,6 +19,7 @@
         </div>
     </div>
 </template>
+
 
 
 <script lang="ts">

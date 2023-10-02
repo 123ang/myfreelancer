@@ -51,7 +51,12 @@
         "update": "Update",
         "close": "Close",
         "delete": "Delete",
-        "addProject": "Add Project"
+        "addProject": "Add Project",
+        "description": "Description",
+        "back": "Back",
+        "Reset Password": "Reset Password",
+        "saveChanges": "Save Changes",
+        "loadingProfile": "Loading Profile..."
       
     }
 }

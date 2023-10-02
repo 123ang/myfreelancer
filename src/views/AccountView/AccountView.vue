@@ -3,50 +3,48 @@
     <div class="container">
       <div v-if="userProfile">
         <div class="my-5">
-          <h2>My Account</h2>
+          <h2>{{ $t('message.account') }}</h2>
         </div>
         <hr>
         <div class="row">
-
-          
           <div class="col-md-12">
-            <h4>Name:</h4>
-            <input type="text" name="name" id="name" placeholder=" Name" :value="userProfile.name">
+            <h4>{{ $t('message.Name') }}</h4>
+            <input type="text" name="name" id="name" :placeholder="$t('message.Name')" :value="userProfile.name">
           </div>
 
           <div class="col-md-12">
-            <h4>Mobile Number:</h4>
-            <input type="tel" name="phone" id="phone" placeholder="Mobile Number" :value="userProfile.phone">
+            <h4>{{ $t('message.phone') }}</h4>
+            <input type="tel" name="phone" id="phone" :placeholder="$t('message.phone')" :value="userProfile.phone">
           </div>
 
           <div class="col-md-12">
-            <h4>Email:</h4>
+            <h4>{{ $t('message.Email') }}</h4>
             <p>{{ userProfile.email }}</p>
           </div>
 
           <div class="col-md-12">
-            <h4>Gender:</h4>
+            <h4>{{ $t('message.Gender') }}</h4>
             <p>{{ userProfile.gender }}</p>
           </div>
 
           <div class="col-md-12">
-            <h4>Date of Birth:</h4>
+            <h4>{{ $t('message.Date of Birth') }}</h4>
             <p>{{ userProfile.dob }}</p>
           </div>
-
         </div>
 
         <div class="my-5 button-container">
-          <button>Save Changes</button>
+          <button>{{ $t('message.saveChanges') }}</button>
         </div>
       </div>
 
       <div v-else>
-        <p>Loading profile...</p>
+        <p>{{ $t('message.loadingProfile') }}</p>
       </div>
     </div>
   </div>
 </template>
+
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';

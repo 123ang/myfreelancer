@@ -50,6 +50,12 @@
         "update": "更新",
         "close": "关闭",
         "delete": "删除",
-        "addProject": "添加项目"
+        "addProject": "添加项目",
+        "description": "描述",
+        "back": "返回",
+        "Reset Password": "重置密码",
+        "saveChanges": "保存更改",
+        "loadingProfile": "加载个人资料..."
+
     }
 }

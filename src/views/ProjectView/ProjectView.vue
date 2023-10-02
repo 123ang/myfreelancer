@@ -3,9 +3,9 @@
     <div class="container">
         <div class="card" v-if="project">
             <h2>{{ project.title }}</h2>
-            <p>Description: {{ project.description }}</p>
+            <p>{{ $t('message.description') }}: {{ project.description }}</p>
             <div class="skill-container">
-              <small class="badge" v-if="!project.project_skills">No Skill Requirement</small>
+              <small class="badge" v-if="!project.project_skills">{{ $t('message.noSkillRequirement') }}</small>
               <small class="badge" v-for="skill in project.project_skills" :key="skill.ID">{{ skill.skill_name }}</small>
             </div>
 
@@ -24,7 +24,7 @@
             <div class="budget-container mt-5" hidden>
                 <!-- You may need a way to get the actual bids, placeholder for now -->
                 <div class="icon-container"><i class="fas fa-comments-dollar"></i></div>
-                <b>Bids: </b>
+                <b>{{ $t('message.bids') }}: </b>
                 <p class="ms-1">5</p>
             </div>
             <div class="budget-container budget mt-1">
@@ -36,11 +36,12 @@
         </div>     
 
         <div class="back-button">
-            <a href="javascript:history.back()">Back</a>
+            <a href="javascript:history.back()">{{ $t('message.back') }}</a>
         </div>           
     </div>
   </div>
 </template>
+
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';

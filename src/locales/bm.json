@@ -50,6 +50,11 @@
         "update": "Kemaskini",
         "close": "Tutup",
         "delete": "Padam",
-        "addProject": "Tambah Projek"
+        "addProject": "Tambah Projek",
+        "description": "Penerangan",
+        "back": "Kembali",
+        "Reset Password": "Tetapkan Semula Kata Laluan",
+        "saveChanges": "Simpan Perubahan",
+        "loadingProfile": "Memuatkan Profil..."
     }
 }
