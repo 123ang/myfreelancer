@@ -43,7 +43,15 @@
         "add": "Add",
         "noSkillRequirement": "No skill requirement",
         "personInCharge": "Person in Charge",
-        "Create": "Create"
+        "Create": "Create",
+        "myProjects": "My Projects",
+        "price": "Price",
+        "bids": "Bids",
+        "view": "View",
+        "update": "Update",
+        "close": "Close",
+        "delete": "Delete",
+        "addProject": "Add Project"
       
     }
 }

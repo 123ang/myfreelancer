@@ -42,6 +42,14 @@
         "add": "添加",
         "noSkillRequirement": "无技能要求",
         "personInCharge": "负责人",
-        "Create": "创建"
+        "Create": "创建",
+        "myProjects": "我的项目",
+        "price": "价格",
+        "bids": "出价",
+        "view": "查看",
+        "update": "更新",
+        "close": "关闭",
+        "delete": "删除",
+        "addProject": "添加项目"
     }
 }

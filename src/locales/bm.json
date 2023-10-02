@@ -42,6 +42,14 @@
         "add": "Tambah",
         "noSkillRequirement": "Tiada keperluan kemahiran",
         "personInCharge": "Orang Bertanggungjawab",
-        "Create": "Cipta"
+        "Create": "Cipta",
+        "myProjects": "Projek Saya",
+        "price": "Harga",
+        "bids": "Tawaran",
+        "view": "Lihat",
+        "update": "Kemaskini",
+        "close": "Tutup",
+        "delete": "Padam",
+        "addProject": "Tambah Projek"
     }
 }
