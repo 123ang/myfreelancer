@@ -55,6 +55,15 @@
         "back": "Kembali",
         "Reset Password": "Tetapkan Semula Kata Laluan",
         "saveChanges": "Simpan Perubahan",
-        "loadingProfile": "Memuatkan Profil..."
+        "loadingProfile": "Memuatkan Profil...",
+        "change_password": "Tukar Kata Laluan",
+        "oldPassword": "Kata Laluan Lama",
+        "newPassword": "Kata Laluan Baru",
+        "confirmNewPassword": "Sahkan Kata Laluan Baru",
+        "editOtherInfo": "Maklumat Pekerja Bebas",
+        "yearExperience": "Tahun Pengalaman Kerja",
+        "expectedPayment": "Bayaran Yang Diharapkan",
+        "coverNotesOptional": "Nota Tambahan (Opsional)",
+        "hour": "Jam"
     }
 }

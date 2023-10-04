@@ -10,12 +10,12 @@
         <div class="row">
           <div class="col-md-12">
             <h4>{{ $t('message.Name') }}</h4>
-            <input type="text" name="name" id="name" :placeholder="$t('message.Name')" :value="userProfile.name">
+            <input type="text" name="name" id="name" :placeholder="$t('message.Name')" v-model="updatedName">
           </div>
 
           <div class="col-md-12">
-            <h4>{{ $t('message.phone') }}</h4>
-            <input type="tel" name="phone" id="phone" :placeholder="$t('message.phone')" :value="userProfile.phone">
+            <h4>{{ $t('message.phone') }}:</h4>
+            <input type="tel" name="phone" id="phone" :placeholder="$t('message.phone')" v-model="updatedPhone">
           </div>
 
           <div class="col-md-6">
@@ -32,26 +32,17 @@
          
           <div class="col-md-6">
             <h4>{{ $t('message.Gender') }}</h4>
-            <p>
-              <select name="gender" v-model="userProfile.gender">
-                <option value="male">{{ $t('message.male') }}</option>
-                <option value="female">{{ $t('message.female') }}</option>
-              </select>
-            
-            </p>
+            <p>{{ userProfile.gender }}</p>
           </div>
 
           <div class="col-md-6">
             <h4>{{ $t('message.Date of Birth') }}</h4>
-            <p>
-              <input type="date" name="dob" v-model="userProfile.dob">
-            
-            </p>
+            <p>{{ userProfile.dob }}</p>
           </div>
         </div>
 
         <div class="my-5 button-container">
-          <button>{{ $t('message.saveChanges') }}</button>
+          <button @click.prevent="handleSaveChanges">{{ $t('message.saveChanges') }}</button>
         </div>
 
         <!-- Skills -->
@@ -193,18 +184,22 @@
             <h4>Others</h4>
 
             <div class="optional-container mb-1 mt-4 ms-2">
-              <div class="mb-4">
-                <h5>Year Experience : </h5>
-                <p>5 years</p>
+              <div v-if="userProfile && userProfile.year_experience !== null">
+                  <h5>{{ $t('message.yearExperience') }}:</h5>
+                  <p>
+                      {{ userProfile.year_experience ?? ""}} 
+                    
+                  </p>
               </div>
+        
               <div class="mb-4">
-                <h5>Expect payment (RM / hour) : </h5>
-                <p>0.00</p>
+                <h5>{{ $t('message.expectedPayment') }}: (RM / {{ $t('message.hour') }}) </h5>
+                <p>  {{ userProfile.wage_per_hour ?? ""}} </p>
               </div>
             </div>
             <div class="mb-4">
-              <h5>Other comments : </h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non felis sapien. Donec tincidunt, felis et ornare sagittis, ipsum lectus suscipit tellus, eu sodales nunc ligula eget magna. Sed fringilla turpis sit amet lacus laoreet feugiat. Integer vel eros non odio consequat molestie in nec augue. Nullam sit amet pellentesque. </p>
+              <h5>{{ $t('message.coverNotesOptional') }}:</h5>
+              <p> {{ userProfile.cover_note ?? ""}} </p>
             </div>
           </div>
           <div class="col-3 col-md-2 add-button-container">
@@ -237,39 +232,72 @@ interface UserProfile {
   phone: string;
   email: string;
   gender: string;
-  dob: string; // Adjust if the returned format is different
-  // Add other fields if needed
+  dob: string;
+  year_experience: number;
+  wage_per_hour:number;
+  cover_note:string;
 }
 
 export default defineComponent({
   name: 'AccountView',
-  components: {
-  },
   setup() {
     const store = useStore();
-    const userProfile = ref<UserProfile | null>(null);    
-    const isAddedOthers = ref<boolean>(true);
-    const isAddedSkills = ref<boolean>(true);
     
+    const userProfile = ref<UserProfile | null>(null);
+    const updatedName = ref<string>('');
+    const updatedPhone = ref<string>('');
+
+    const isAddedSkills = ref<boolean>(true); // Temporary - Update based on your logic.
+    const isAddedOthers = ref<boolean>(true); // Temporary - Update based on your logic.
+
+    const handleSaveChanges = async () => {
+        try {
+          const apiUrl = store.state.host_url + "user/update-profile";  // Concatenate host_url with endpoint
+         
+            const response = await axios.post(apiUrl, {
+              name: updatedName.value,
+              phone: updatedPhone.value,
+              user_id: store.state.user_id
+            });
+
+
+
+            if (response.data.success) {
+              alert('Profile updated successfully');
+            } else {
+              alert('Error updating profile: ' + response.data.message);
+            }
+        } catch (error) {
+            alert('Network error. Please try again.');
+        }
+    };
+
     onMounted(async () => {
       try {
         const url = `${store.state.host_url}user/profile/${store.state.user_id}`;
-        console.log(url)
         const response = await axios.post(url);
         userProfile.value = response.data.user;
+
+        // Populate the inputs with the fetched data
+        updatedName.value = userProfile.value?.name || '';
+        updatedPhone.value = userProfile.value?.phone || '';
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
     });
 
     return {
-      userProfile, 
+      userProfile,
+      updatedName,
+      updatedPhone,
+      isAddedSkills,
       isAddedOthers,
-      isAddedSkills
+      handleSaveChanges
     };
   }
 });
 </script>
+
 
 
 <style lang="scss" scoped>

@@ -55,7 +55,15 @@
         "back": "返回",
         "Reset Password": "重置密码",
         "saveChanges": "保存更改",
-        "loadingProfile": "加载个人资料..."
-
+        "loadingProfile": "加载个人资料...",
+        "change_password": "更换密码",
+        "oldPassword": "旧密码",
+        "newPassword": "新密码",
+        "confirmNewPassword": "确认新密码",
+        "editOtherInfo": "自由工作者信息",
+        "yearExperience": "工作经验年数",
+        "expectedPayment": "预期付款",
+        "coverNotesOptional": "封面说明（可选）",
+        "hour": "小时"
     }
 }

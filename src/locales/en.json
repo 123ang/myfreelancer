@@ -20,7 +20,7 @@
         "male": "Male",
         "female": "Female",
         "Date of Birth": "Date of Birth:",
-        "phone": "Mobile Number:",
+        "phone": "Mobile Number",
         "Confirm Password": "Confirm Password",
         "termAndCondition": "TERMS AND CONDITIONS",
         "aboutTitle": "Welcome to MyFreeLancer!",
@@ -56,7 +56,16 @@
         "back": "Back",
         "Reset Password": "Reset Password",
         "saveChanges": "Save Changes",
-        "loadingProfile": "Loading Profile..."
+        "loadingProfile": "Loading Profile...",
+        "change_password": "Change Password",
+        "oldPassword": "Old Password",
+        "newPassword": "New Password",
+        "confirmNewPassword": "Confirm New Password",
+        "editOtherInfo": "Freelancer Information",
+        "yearExperience": "Year of Working Experience",
+        "expectedPayment": "Expected Payment",
+        "coverNotesOptional": "Cover Notes (Optional)",
+        "hour": "hour"
       
     }
 }
