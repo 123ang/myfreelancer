@@ -6,12 +6,12 @@
       </a>
       <div :class="{'nav-link-container':true, active: isMenuToggle}">
         <div class="link close-button" @click="closeMenu"><i class="fas fa-times"></i></div>
-          <div v-if="isLogin">
+          <div class="d-flex" v-if="isLogin">
             <a href="/my-project" class="link">{{ $t('message.project') }}</a>
             <a href="/my-account" class="link">{{ $t('message.account') }}</a>
             <a @click="logout" class="link">{{ $t('message.logout') }}</a>
           </div>
-          <div v-else>
+          <div class="d-flex" v-else>
             <a href="/register" class="link">{{ $t('message.register') }}</a>         
             <a href="/login" class="link">{{ $t('message.login') }}</a>         
           </div>

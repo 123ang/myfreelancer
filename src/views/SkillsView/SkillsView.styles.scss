@@ -1,0 +1,59 @@
+.body-section{
+    .back-button{
+        position: absolute;
+        padding: .5rem 1rem;
+        top: 0;
+        left: 0;
+        box-shadow: $shadow-1;
+        border-radius: $radius-1 0 $radius-1 0;
+    }
+
+    .add-skill-container{
+        input{
+            border-radius: $radius-1 0 0 $radius-1 !important;
+        }
+        .skill-button{
+            border-radius: 0 $radius-1 $radius-1 0  !important;
+            background-color: $main-1;
+            padding: .25rem 1rem;
+            border: 1px solid $main-1;
+            *{color: #fff;}
+        }
+    }
+
+    .skill-bar{
+        display: flex;
+        align-items: center;
+        padding-inline: 1rem;
+        max-width: 500px;
+        margin-block: 1rem;
+
+        h5{width: 100%;}
+        select{
+            min-width: 25px;
+            width: 25%;
+            max-width: 75px;
+            text-align: center;
+            border: 1px solid $font-main;
+            padding: .25rem .1rem;
+            border-radius: $radius-1;
+            margin-right: 1rem;
+        }
+        button.remove-skill{
+            // background-color: $main-1;
+            height: 100%;
+            padding: .25rem .5rem;
+            *{font-size: 16px; color: $red-1;}
+        }
+    }
+
+    &.edit{
+        background-color: $main-3;
+
+        .submit-button{
+            .button-main{
+                background-color: $main-1;
+            }
+        }
+    }
+}

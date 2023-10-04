@@ -34,13 +34,9 @@ $ease-1: cubic-bezier(0,1,.5,1);
 $bootstrap-icon: "bootstrap-icons";
 $awesome-icon: "Font Awesome 5 Free";
 
-body {
-    min-height: $body-height;
-}
+body {min-height: $body-height;}
 
-section{
-    padding-block: 5rem;
-}
+section{padding-block: 5rem;}
 
 h1, h2, h3, h4, h5, h6{
     font-weight: 500;
@@ -50,6 +46,7 @@ h2 {font-size: 2rem;}
 h3 {font-size: 1.75rem;}
 h4 {font-size: 1.5rem;}
 h5 {font-size: 1.25rem;}
+label{user-select: none;}
 
 .body-section{
     padding-top: $nav-height;
@@ -58,6 +55,20 @@ h5 {font-size: 1.25rem;}
 
 .font-logo {
     font-family: 'Montserrat Alternates', sans-serif;
+}
+
+a:hover{
+    color: initial;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
 }
 
 // @media screen and (max-width: 1536px) {}

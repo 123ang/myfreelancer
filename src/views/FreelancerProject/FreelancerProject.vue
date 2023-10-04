@@ -33,45 +33,15 @@
                 <p class="ms-1">{{ project.budget }}</p>
             </div>
 
-            <hr>            
+            <hr>
 
-            <!-- bidding list -->
-            <div class="bid-container" >
-              <h5 class="mb-2">Bidding List</h5>
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col" style="">#</th>
-                      <th scope="col" style="width: 100%">Name</th>
-                      <th scope="col" style="min-width: 180px">Bidding Price (RM)</th>
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td><a href="#mark">Mark</a></td>
-                      <td>100.00</td>
-                      <td>
-                        <div class="flex gap-2 icon-container">
-                          <div><i class="fas fa-check-circle accept"></i></div>
-                          <div><i class="fas fa-times-circle reject"></i></div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td><a href="#Jacob">Jacob</a></td>
-                      <td>100.00</td>
-                      <td>
-                        <div class="flex gap-2 icon-container">
-                          <div><i class="fas fa-check-circle accept"></i></div>
-                          <div><i class="fas fa-times-circle reject"></i></div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+            <!-- bidding -->
+            <div class="bidding-container">
+              <label class="mb-2">Your bids (RM) : </label>                                          
+              <div class="input-container">
+                <input type="number" >
+                <button>Bids</button>
+              </div>
             </div>
 
         </div>     
@@ -121,7 +91,7 @@ interface Project {
 }
 
 export default defineComponent({
-  name: 'ProjectView',
+  name: 'FreelancerProject',
   props: {
     id: {
       type: Number,
@@ -151,5 +121,5 @@ export default defineComponent({
 
 <style lang="scss" scoped>
   @import '@/assets/styles/global.styles.scss';
-  @import './ProjectView.styles.scss';
+  @import './FreelancerProject.styles.scss';
 </style>

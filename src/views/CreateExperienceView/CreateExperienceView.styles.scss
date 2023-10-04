@@ -1,0 +1,11 @@
+.body-section{
+    .back-button{
+        position: absolute;
+        padding: .5rem 1rem;
+        top: 0;
+        left: 0;
+        box-shadow: $shadow-1;
+        border-radius: $radius-1 0 $radius-1 0;
+    }
+
+}

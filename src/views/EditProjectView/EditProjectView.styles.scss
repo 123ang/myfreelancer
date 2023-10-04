@@ -1,5 +1,5 @@
 .body-section{
-    background-color: $main-4;
+    background-color: $main-3;
     padding-bottom: 5rem;
 
     .card{
@@ -9,6 +9,15 @@
         box-shadow: $shadow-1;
         max-width: 750px;
         margin-inline: auto;
+
+        .back-button{
+            position: absolute;
+            padding: .5rem 1rem;
+            top: 0;
+            left: 0;
+            box-shadow: $shadow-1;
+            border-radius: $radius-1 0 $radius-1 0;
+        }
         
         h2{ margin-bottom: 1rem; }
         hr{ margin-block: 2rem; }
@@ -79,7 +88,7 @@
             justify-content: center;
             
             button{
-                background: $main-4;
+                background: $main-1;
                 border-radius: $radius-1;
                 color: #fff;
                 font-size: 1.25rem;

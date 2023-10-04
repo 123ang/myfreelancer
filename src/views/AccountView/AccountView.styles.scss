@@ -20,6 +20,50 @@
                 font-weight: 600;
                 margin-block: .5rem 2.5rem;
             }
+
+            .change-password{
+                color: $blue-1;
+            }
+            
+            .add-button-container{
+                display: flex;
+                .add-button{
+                    margin-left: auto;
+                    margin-top: .5rem;
+                    padding: .5rem 1rem;
+                    border-radius: $radius-1;
+                    background-color: $main-1;
+                    color: #fff;
+                    height: fit-content;
+                }
+            }
+
+            .optional-container{
+                p{
+                    margin: 0;
+                    padding: unset;
+                    font-weight: initial;
+                }
+                .button-container{
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+
+                    .button{
+                        margin-top: .25rem;
+                        user-select: none;
+                        cursor: pointer;
+                        padding: .25rem 1rem;
+                    }
+                }                
+            }
+
+            &#expertise-skills{
+                .skill-name{
+                    min-width: 100px;
+                }
+                i{color: $main-1;}
+            }
         }
 
         .button-container {

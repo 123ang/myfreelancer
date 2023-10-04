@@ -1,0 +1,19 @@
+.body-section{
+    background-color: $main-3;
+
+    .back-button{
+        position: absolute;
+        padding: .5rem 1rem;
+        top: 0;
+        left: 0;
+        box-shadow: $shadow-1;
+        border-radius: $radius-1 0 $radius-1 0;
+    }
+
+
+    .submit-button{
+        .button-main{
+            background-color: $main-1 !important;
+        }
+    }
+}

@@ -2,6 +2,8 @@
   <div class="body-section">
     <div class="container">
         <div class="card">
+            <a class="back-button" href="javascript:history.back()"><i class="fas fa-chevron-left me-2"></i>Back</a>
+
             <h2>{{ $t('message.Create Project') }}</h2>
             <hr>
             <!-- title -->
@@ -67,7 +69,7 @@
               </div>
             </div>
             <div class="submit-button">
-              <button @click="submitProject">{{ $t('message.Create') }}</button>
+              <button @click="submitProject">Save Changes</button>
             </div>        
         </div>            
     </div>
@@ -83,7 +85,7 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
 export default defineComponent({
-  name: 'CreateProjectView',
+  name: 'EditProjectView',
   setup() {
     const store = useStore();
     const router = useRouter();
@@ -221,7 +223,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
   @import '@/assets/styles/global.styles.scss';
-  @import './CreateProjectView.styles.scss';
+  @import './EditProjectView.styles.scss';
 </style>
 
 <style lang="scss" >

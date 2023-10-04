@@ -1,0 +1,36 @@
+.body-section{
+    background-color: $main-3;
+    padding-bottom: 5rem;
+
+    .card{
+        margin-top: 5rem;
+        padding: 3rem 3rem;
+        border-radius: $radius-1;
+        box-shadow: $shadow-1;
+        max-width: 750px;
+        margin-inline: auto;
+        
+        h2{ margin-bottom: 1rem; }
+        hr{ margin-block: 2rem; }
+        
+    }
+
+    .back-button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5rem;
+        
+        a{
+            background-color: $main-4;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.25rem;
+            padding: .5rem 3rem;
+            border-radius: $radius-1;
+
+            &:hover{color: #fff;}
+        }
+    }
+}
+

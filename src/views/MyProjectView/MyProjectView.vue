@@ -34,7 +34,7 @@
                         <div class="button-container my-3 grid grid-cols-1 md:grid-cols-2 gap-4">
                             <a :href="'/project/' + project.ID" class="button view">{{ $t('message.view') }}</a>
                             <!-- Add the actual links or methods for update, close, and delete -->
-                            <a href="#update" class="button update">{{ $t('message.update') }}</a>
+                            <a href="/edit-project" class="button update">{{ $t('message.update') }}</a>
                             <a @click="closeProject(project.ID)" class="button close">{{ $t('message.close') }}</a>
                             <a @click="deleteProject(project.ID)" class="button delete">{{ $t('message.delete') }}</a>
                         </div>
@@ -52,8 +52,56 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
   </div>
+
+  <!-- closed project -->
+  <div id="closed-project" class="body-section">
+    <div class="container" >
+      <div class="my-5"><h2>Closed Projects</h2></div>
+        <hr>
+        <div class="pb-4 pt-5">
+            <div class="projects-container grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-4">
+
+                <!-- Loop through projects and display them -->
+                <div v-for="project in projects" :key="project.ID" class="card-container">
+                    <div class="card">
+                        <h4> {{ project.title }} </h4>
+                        <div class="skill-container">
+                            <!-- Loop through skills for each project -->
+                            <small v-for="skill in project.project_skills" :key="skill.ID" class="badge">
+                                {{ skill.skill_name }}
+                            </small>
+                        </div>
+                        <hr class="my-3">
+                        <!-- Price -->
+                        <div class="d-flex mb-3">
+                            <p>{{ $t('message.price') }}: </p>
+                            <div class="ms-2 d-flex">
+                                <p>RM</p>
+                                <p>{{ project.budget }}</p>
+                            </div>
+                        </div>
+                        <!-- Bids (you may need to adjust according to your data structure) -->
+                        <div class="d-flex mb-3" hidden>
+                            <p>{{ $t('message.bids') }}: </p>
+                            <div class="ms-2 d-flex">0</div>
+                        </div>
+                        <!-- Buttons (adjust href as needed) -->
+                        <div class="button-container my-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <a :href="'/project/' + project.ID" class="button view">{{ $t('message.view') }}</a>
+                            <!-- Add the actual links or methods for update, close, and delete -->
+                            <a href="#update" class="button update">{{ $t('message.update') }}</a>
+                            <a @click="closeProject(project.ID)" class="button close">{{ $t('message.close') }}</a>
+                            <a @click="deleteProject(project.ID)" class="button delete">{{ $t('message.delete') }}</a>
+                        </div>
+                    </div>  
+                </div>    
+                
+            </div>
+        </div>
+    </div>
+  </div>  
 </template>
 
 <script lang="ts">
