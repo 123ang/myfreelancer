@@ -32,12 +32,21 @@
          
           <div class="col-md-6">
             <h4>{{ $t('message.Gender') }}</h4>
-            <p>{{ userProfile.gender }}</p>
+            <p>
+              <select name="gender" v-model="userProfile.gender">
+                <option value="male">{{ $t('message.male') }}</option>
+                <option value="female">{{ $t('message.female') }}</option>
+              </select>
+            
+            </p>
           </div>
 
           <div class="col-md-6">
             <h4>{{ $t('message.Date of Birth') }}</h4>
-            <p>{{ userProfile.dob }}</p>
+            <p>
+              <input type="date" name="dob" v-model="userProfile.dob">
+            
+            </p>
           </div>
         </div>
 
