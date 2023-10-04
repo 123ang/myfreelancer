@@ -96,6 +96,10 @@
                     pointer-events: initial;
                 }
 
+                .d-flex{
+                    flex-direction: column;
+                }
+                
                 .link{
                     width: 100%;
                     justify-content: center;
@@ -127,8 +131,8 @@
             justify-content: center;
             padding: 1rem;
             height: $nav-height;
-            user-select: none;
-            cursor: pointer;       
+            cursor: pointer;      
+
             @media screen and (max-width: 768px) {
                 margin-left: auto;    
             }
@@ -153,6 +157,7 @@
                             opacity .3s;
                 opacity: 0;
                 transform: translateY(2rem);
+                scale: 0;
                 
                 .language-option{
                     margin-block: .5rem;
@@ -181,6 +186,7 @@
                     transform: none;
                     opacity: 1;
                     pointer-events: initial;
+                    scale: 1;
                 }
             }
 

@@ -18,6 +18,7 @@ import AccountView from '../views/AccountView/AccountView.vue'
 import FreelancerProject from '../views/FreelancerProject/FreelancerProject.vue'
 import FreelancerView from '../views/FreelancerView/FreelancerView.vue'
 import SkillsView from '../views/SkillsView/SkillsView.vue'
+import AllProjectsView from '../views/AllProjectsView/AllProjectsView.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -114,6 +115,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/expertise-skills',
     name: 'expertise-skills',
     component: SkillsView
+  },
+  {
+    path: '/all-projects',
+    name: 'all-projects',
+    component: AllProjectsView
   },
 ]
 

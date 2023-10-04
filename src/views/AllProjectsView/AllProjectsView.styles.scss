@@ -1,0 +1,35 @@
+.body-section{
+    .search-container{
+        box-shadow: $shadow-1;
+        
+        .container{
+            padding: 3rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            row-gap: 2rem;
+
+            .dropdown-container{
+                display: flex;
+                padding-inline: 1rem;
+                flex-direction: column;
+                max-width: 500px;
+
+                label{
+                    padding-inline: 1rem;
+                    margin-bottom: .25rem;
+                }
+
+                select{
+                    border: 1px solid $grey-1;
+                    padding: .5rem 1rem;
+                    border-radius: $radius-1;
+
+                    &:focus-within{
+                        outline: initial;
+                    }
+                }
+            }
+        }
+    }
+}
