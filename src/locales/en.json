@@ -88,7 +88,11 @@
         "add_work_experience": "Add Work Experience",
         "job_title": "Job Title",
         "company_name": "Company Name",
-        "currently_work_here": "Currently Work Here"
-      
+        "currently_work_here": "Currently Work Here",
+        "addExpertiseSkills": "Expertise Skills",
+        "addSkillLabel": "Add Skill",
+        "skillPlaceholder":"Add your skill here",
+        "rateSkill": "* Rate your skill level from 1 to 5",
+        "save": "Save"
     }
 }

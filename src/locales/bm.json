@@ -87,6 +87,12 @@
         "add_work_experience": "Tambah Pengalaman Kerja",
         "job_title": "Jawatan",
         "company_name": "Nama Syarikat",
-        "currently_work_here": "Sedang Bekerja Di Sini"
+        "currently_work_here": "Sedang Bekerja Di Sini",
+        "addExpertiseSkills": "Kemahiran Pakar",
+        "addSkillLabel": "Tambah Kemahiran",
+        "skillPlaceholder": "Tambah kemahiran anda di sini",
+        "rateSkill": "* Nilai tahap kemahiran anda dari 1 hingga 5",
+        "save": "Simpan"
+
     }
 }

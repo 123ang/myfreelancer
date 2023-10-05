@@ -87,6 +87,11 @@
         "add_work_experience": "添加工作经验",
         "job_title": "职位名称",
         "company_name": "公司名称",
-        "currently_work_here": "目前在此工作"
+        "currently_work_here": "目前在此工作",
+        "addExpertiseSkills": "专业技能",
+        "addSkillLabel": "添加技能",
+        "skillPlaceholder": "在此添加您的技能",
+        "rateSkill": "* 请对您的技能等级进行1至5的评价",
+        "save": "保存"
     }
 }

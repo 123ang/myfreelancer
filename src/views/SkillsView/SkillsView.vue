@@ -2,17 +2,17 @@
     <div class="body-section" id="expertise-skills">
         <div class="container">
             <div class="card">
-                <a class="back-button" href="javascript:history.back()"><i class="fas fa-chevron-left me-2"></i>{{ $t('general.back') }}</a>
+                <a class="back-button" href="javascript:history.back()"><i class="fas fa-chevron-left me-2"></i>{{ $t('message.back') }}</a>
                 
-                <h2 class="mb-5 text-center">{{ $t('skills.addExpertiseSkills') }}</h2>
+                <h2 class="mb-5 text-center">{{ $t('message.addExpertiseSkills') }}</h2>
 
                 <div class="form-container">
-                    <form>
+                    <form @submit.prevent="saveSkills">
                         <div class="input-container">
                             <div class="login-form-container">                  
-                                <label for="skill_name">{{ $t('skills.addSkillLabel') }}</label>
+                                <label for="skill_name">{{ $t('message.addSkillLabel') }}</label>
                                 <div class="d-flex add-skill-container">
-                                    <input type="text" v-model="skill.skill_name" :placeholder="$t('skills.skillPlaceholder')">
+                                    <input type="text" v-model="skill.skill_name" :placeholder="$t('message.skillPlaceholder')">
                                     <button type="button" class="skill-button" @click="addSkill"><i class="fas fa-plus"></i></button>
                                 </div>
                             </div>
@@ -23,7 +23,7 @@
                                 class="skill-bar" 
                                 v-for="s in skills" 
                                 :key="s.ID">
-                                <select v-model="s.skill_proficiency">
+                                <select v-model="s.skill_proficiency" @change="trackChanges(s.ID)">
                                     <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
                                 </select>
                                 <h5>{{ s.skill_name }}</h5>
@@ -31,7 +31,7 @@
                             </div>
                         </span>
 
-                        <small>{{ $t('skills.rateSkill') }}</small>
+                        <small>{{ $t('message.rateSkill') }}</small>
 
                         <div class="submit-button">
                             <button class="button-main login" type="submit">
@@ -64,6 +64,7 @@ interface Skill {
 export default defineComponent({
     name: 'SkillsView',
     setup() {
+        const store = useStore();
         const skill = ref<Skill>({
             user_id: store.state.user_id,
             ID: 0,
@@ -75,14 +76,20 @@ export default defineComponent({
         });
 
         const skills = ref<Skill[]>([]);
-        const store = useStore();
-        const get_user_api = store.state.host_url + "user-skills?user_id="+ store.state.user_id;
+        const changedSkills = ref<number[]>([]);
+        const get_user_api = store.state.host_url + "get-user-skill?user_id="+ store.state.user_id;
         const store_user_api = store.state.host_url + "user-skill";
-   
+        const update_skill_api = store.state.host_url + "user-skill/";
+
+        const trackChanges = (skillId: number) => {
+            if (!changedSkills.value.includes(skillId)) {
+                changedSkills.value.push(skillId);
+            }
+        };
         const fetchSkills = async () => {
             try {
                 const response = await axios.get(get_user_api);
-                skills.value = response.data; // Assuming the endpoint returns an array of skills
+                skills.value = response.data.skills; // Assuming the endpoint returns an array of skills
             } catch (error) {
                 alert('Error fetching skills.');
             }
@@ -125,13 +132,35 @@ export default defineComponent({
             }
         };
 
+       const saveSkills = async () => {
+            for (const skillId of changedSkills.value) {
+                const skillToUpdate = skills.value.find(s => s.ID === skillId);
+                if (skillToUpdate) {
+                    try {
+                        console.log(update_skill_api + skillId);
+                        console.log(skillToUpdate)
+                        const response = await axios.post(update_skill_api + skillId, skillToUpdate);
+                        if (response.data.message !== 'Record updated successfully') {
+                            alert(`Error updating skill: ${skillToUpdate.skill_name}`);
+                        }
+                    } catch (error) {
+                        alert(`Error updating skill: ${skillToUpdate.skill_name}`);
+                    }
+                }
+            }
+            alert('Skills updated successfully');
+            changedSkills.value = []; // Reset after updating
+        };
+
         onMounted(fetchSkills);
 
         return {
             skill,
             skills,
             addSkill,
-            deleteSkill
+            deleteSkill,
+            saveSkills,
+            trackChanges
         };
     }
 });
