@@ -65,7 +65,30 @@
         "yearExperience": "Year of Working Experience",
         "expectedPayment": "Expected Payment",
         "coverNotesOptional": "Cover Notes (Optional)",
-        "hour": "hour"
+        "hour": "hour",
+        "education_level": "Education Level",
+        "preSchool": "Pre-school",
+        "primarySchool": "Primary School",
+        "middleSchool": "Middle School",
+        "highSchool": "High School",
+        "vocational": "Vocational Training / Certificate",
+        "diploma": "Diploma",
+        "associateDegree": "Associate Degree",
+        "bachelorsDegree": "Bachelor's Degree",
+        "postgraduateDiploma": "Postgraduate Diploma",
+        "mastersDegree": "Master's Degree",
+        "doctorate": "Doctorate (Ph.D.)",
+        "professionalQualification": "Professional Qualification",
+        "venue_of_education": "School",
+        "from_period": "From",
+        "to_period": "To",
+        "major": "Major",
+        "optional": "(Optional)",
+        "add_education": "Add Education",
+        "add_work_experience": "Add Work Experience",
+        "job_title": "Job Title",
+        "company_name": "Company Name",
+        "currently_work_here": "Currently Work Here"
       
     }
 }
