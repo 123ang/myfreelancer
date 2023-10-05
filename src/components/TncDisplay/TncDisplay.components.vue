@@ -4,7 +4,7 @@
             <h4 class="text-center mb-4">{{ $t('message.termAndCondition') }}</h4>
             <div v-if="language === 'en'">
                 <h5>1. Purpose</h5>
-                <p>This agreement sets forth the terms and conditions governing the relationship between MYFreelance ("the Company") and users of our freelance platform service ("the Service"). The Service aims to centralize the scattered information on freelancers in Malaysia, their skills, rates, and portfolios, providing a win-win situation for both freelancers and businesses.</p>
+                <p>This agreement sets forth the terms and conditions governing the relationship between MyFreeLancer ("the Company") and users of our freelance platform service ("the Service"). The Service aims to centralize the scattered information on freelancers in Malaysia, their skills, rates, and portfolios, providing a win-win situation for both freelancers and businesses.</p>
 
                 <h5>2. User Definition</h5>
                 <p>Freelancer: An individual or entity offering services on the platform.<br>
@@ -67,12 +67,12 @@
                 <p>This agreement is effective from April 15, 2023.</p>
 
                 <h5>Conclusion</h5>
-                <p>Thank you for choosing MYFreelance. We are committed to providing a secure and efficient platform for all users.</p>
+                <p>Thank you for choosing MyFreeLancer. We are committed to providing a secure and efficient platform for all users.</p>
             </div>
 
             <div v-if="language === 'cn'">
                 <h5>1. 宗旨</h5>
-                <p>本协议规定了MYFreelance（“公司”）与我们的自由职业者平台服务（“服务”）用户之间关系的条款和条件。该服务旨在集中马来西亚的自由职业者的零散信息、他们的技能、费率和作品集，为自由职业者和企业双方提供双赢的局面。</p>
+                <p>本协议规定了MyFreeLancer（“公司”）与我们的自由职业者平台服务（“服务”）用户之间关系的条款和条件。该服务旨在集中马来西亚的自由职业者的零散信息、他们的技能、费率和作品集，为自由职业者和企业双方提供双赢的局面。</p>
 
                 <h5>2. 用户定义</h5>
                 <p>自由职业者：在平台上提供服务的个人或实体。<br>
@@ -138,11 +138,11 @@
                 <p>本协议自2023年4月15日起生效。</p>
 
                 <h5>结论</h5>
-                <p>感谢您选择MYFreelance。我们致力于为所有用户提供安全高效的平台。</p>
+                <p>感谢您选择MyFreeLancer。我们致力于为所有用户提供安全高效的平台。</p>
             </div>
             <div v-if="language === 'my'">
                 <h5>1. Tujuan</h5>
-                <p>Perjanjian ini menetapkan terma dan syarat yang mengawal hubungan antara MYFreelance ("Syarikat") dan pengguna perkhidmatan platform pekerja bebas kami ("Perkhidmatan"). Perkhidmatan ini bertujuan untuk menyatukan maklumat yang tersebar mengenai pekerja bebas di Malaysia, kemahiran mereka, kadar, dan portfolio, menyediakan situasi menang-menang untuk kedua-dua pekerja bebas dan perniagaan.</p>
+                <p>Perjanjian ini menetapkan terma dan syarat yang mengawal hubungan antara MyFreeLancer ("Syarikat") dan pengguna perkhidmatan platform pekerja bebas kami ("Perkhidmatan"). Perkhidmatan ini bertujuan untuk menyatukan maklumat yang tersebar mengenai pekerja bebas di Malaysia, kemahiran mereka, kadar, dan portfolio, menyediakan situasi menang-menang untuk kedua-dua pekerja bebas dan perniagaan.</p>
 
                 <h5>2. Definisi Pengguna</h5>
                 <p>Pekerja Bebas: Individu atau entiti yang menawarkan perkhidmatan di platform ini.<br>
@@ -208,7 +208,7 @@
                 <p>Perjanjian ini berkuat kuasa mulai 15 April 2023.</p>
 
                 <h5>Penutup</h5>
-                <p>Terima kasih kerana memilih MYFreelance. Kami komited untuk menyediakan platform yang selamat dan berkesan untuk semua pengguna.</p>
+                <p>Terima kasih kerana memilih MyFreeLancer. Kami komited untuk menyediakan platform yang selamat dan berkesan untuk semua pengguna.</p>
             </div>
         </div>
     </div>
