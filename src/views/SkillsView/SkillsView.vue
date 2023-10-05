@@ -2,44 +2,40 @@
     <div class="body-section" id="expertise-skills">
         <div class="container">
             <div class="card">
-                <a class="back-button" href="javascript:history.back()"><i class="fas fa-chevron-left me-2"></i>Back</a>
+                <a class="back-button" href="javascript:history.back()"><i class="fas fa-chevron-left me-2"></i>{{ $t('general.back') }}</a>
                 
-                <h2 class="mb-5 text-center">Expertise Skills</h2>
+                <h2 class="mb-5 text-center">{{ $t('skills.addExpertiseSkills') }}</h2>
 
                 <div class="form-container">
                     <form>
                         <div class="input-container">
                             <div class="login-form-container">                  
-                                <label for="skill_name">Add skill:</label>
+                                <label for="skill_name">{{ $t('skills.addSkillLabel') }}</label>
                                 <div class="d-flex add-skill-container">
-                                    <input type="text" id="skill_name">
-                                    <button type="button" class="skill-button"><i class="fas fa-plus"></i></button>
+                                    <input type="text" v-model="skill.skill_name" :placeholder="$t('skills.skillPlaceholder')">
+                                    <button type="button" class="skill-button" @click="addSkill"><i class="fas fa-plus"></i></button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- preview -->
                         <span class="preview-skill-container">
-                            <!-- <div class="skill-bar" id="skill-bar-1">
-                                <select id="skill_1">
-                                    <option value="1" selected>1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>  
-                                <h5>Skill 1</h5>                          
-                                <button class="remove-skill" type="button"><i class="fas fa-trash-alt"></i></button>                                                
-                            </div> -->
+                            <div 
+                                class="skill-bar" 
+                                v-for="s in skills" 
+                                :key="s.ID">
+                                <select v-model="s.skill_proficiency">
+                                    <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
+                                </select>
+                                <h5>{{ s.skill_name }}</h5>
+                                <button type="button" class="remove-skill" @click="deleteSkill(s.ID)"><i class="fas fa-trash-alt"></i></button>
+                            </div>
                         </span>
 
-                        <small>* Rate your skill level from 1 to 5</small>
+                        <small>{{ $t('skills.rateSkill') }}</small>
 
                         <div class="submit-button">
                             <button class="button-main login" type="submit">
-                                {{
-                                    urlTitle === UrlParamTitle.edit ? 'Save Changes' : 'Save'
-                                }}
+                                {{ $t('message.save') }}
                             </button>
                         </div>
                     </form>
@@ -50,76 +46,95 @@
 </template>
 
 
-<script lang="ts">
 
-import { defineComponent, onMounted, ref } from 'vue';
+<script lang="ts">
+import { defineComponent, ref, onMounted } from 'vue';
+import axios from 'axios';
+import { useStore } from 'vuex';
+interface Skill {
+    user_id: number;
+    ID: number;
+    skill_name: string;
+    skill_proficiency: number;
+    created_by: number;
+    updated_by: number;
+    status: number;
+}
 
 export default defineComponent({
-  name: 'SkillsView',
-  setup() {
-    let bodySection:HTMLElement = document.querySelector('.body-section')!;
-    let skillInputContainer:HTMLInputElement = document.querySelector('.add-skill-container')!;
-    let previewContainer:HTMLInputElement = document.querySelector('.preview-skill-container')!;
+    name: 'SkillsView',
+    setup() {
+        const skill = ref<Skill>({
+            user_id: store.state.user_id,
+            ID: 0,
+            skill_name: '',
+            skill_proficiency: 1,
+            created_by: 1, // Same as user_id
+            updated_by: 1, // Same as user_id
+            status: 1
+        });
 
-    const UrlParamTitle = {
-        edit: 'edit',
-        add: 'add'
+        const skills = ref<Skill[]>([]);
+        const store = useStore();
+        const get_user_api = store.state.host_url + "user-skills?user_id="+ store.state.user_id;
+        const store_user_api = store.state.host_url + "user-skill";
+   
+        const fetchSkills = async () => {
+            try {
+                const response = await axios.get(get_user_api);
+                skills.value = response.data; // Assuming the endpoint returns an array of skills
+            } catch (error) {
+                alert('Error fetching skills.');
+            }
+        };
+
+        const addSkill = async () => {
+            if (!skill.value.skill_name.trim()) {
+                alert('Please enter a skill name.');
+                return;
+            }
+            try {
+                const response = await axios.post(store_user_api, skill.value);
+                if (response.data.message === 'Record created successfully') {
+                    skills.value.push(response.data.data);
+                    skill.value.skill_name = ''; // Reset skill name after successful addition
+                    alert(response.data.message);
+                } else {
+                    alert('Error adding skill.');
+                }
+            } catch (error) {
+                alert('Error adding skill.');
+            }
+        };
+
+        const deleteSkill = async (skillId: number) => {
+            try {
+                const delete_user_api = store.state.host_url + "user-skill/" + skillId;
+                const response = await axios.delete(delete_user_api);
+                if (response.data.message === 'Record status changed to 0 successfully') {
+                    const index = skills.value.findIndex(s => s.ID === skillId);
+                    if (index > -1) {
+                        skills.value.splice(index, 1);
+                    }
+                    alert(response.data.message);
+                } else {
+                    alert('Error deleting skill.');
+                }
+            } catch (error) {
+                alert('Error deleting skill.');
+            }
+        };
+
+        onMounted(fetchSkills);
+
+        return {
+            skill,
+            skills,
+            addSkill,
+            deleteSkill
+        };
     }
-    
-    // Get Page theme from url
-    const urlParams = new URLSearchParams(window.location.search);    
-    const urlTitle = ref<string | null>(urlParams.get('title'));
-
-    // setup add skill input
-    const setupAddSkill = () => {
-        const addButton = skillInputContainer.querySelector('button');
-        const input = skillInputContainer.querySelector('input');
-        addButton?.addEventListener('click', ()=>{
-            if (!input?.value || !input.value.trim()) return;
-            const newDiv = document.createElement('div');
-            newDiv.classList.add('skill-bar');
-            newDiv.innerHTML = `
-                <select id="${input.value}">
-                    <option value="1" selected>1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>  
-                <h5>${input.value}</h5>                          
-                <button type="button" class="remove-skill"><i class="fas fa-trash-alt"></i></button>      
-            `
-            previewContainer.appendChild(newDiv);
-            input.value = '';
-
-            // setup remove button
-            const remove = newDiv.querySelector('.remove-skill');
-            remove?.addEventListener('click', ()=>{
-                newDiv.remove();
-            })            
-        })
-    }
-    
-    
-    onMounted(()=>{
-        bodySection = document.querySelector('.body-section')!;
-        skillInputContainer = document.querySelector('.add-skill-container')!;
-        previewContainer = document.querySelector('.preview-skill-container')!;
-
-        // add class to body-section
-        urlTitle.value && bodySection.classList.add(urlTitle.value);
-
-        setupAddSkill()
-
-    })
-
-    return{
-        urlTitle,
-        UrlParamTitle
-    }
-  }
 });
-
 </script>
 
   
