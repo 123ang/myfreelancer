@@ -12,11 +12,26 @@
                             <div class="login-form-container">                  
                                 <label for="skill_name">{{ $t('message.addSkillLabel') }}</label>
                                 <div class="d-flex add-skill-container">
-                                    <input type="text" v-model="skill.skill_name" :placeholder="$t('message.skillPlaceholder')">
-                                    <button type="button" class="skill-button" @click="addSkill"><i class="fas fa-plus"></i></button>
+        
+                                    <input 
+                                        type="text" 
+                                        v-model="skill.skill_name" 
+                                        :placeholder="$t('message.skillPlaceholder')" 
+                                        @input="filterSkills"
+                                    >
+                                    <!-- Autocomplete suggestions -->
+
+                                    <div class="autocomplete-suggestions" v-if="isAutocompleteVisible">
+                                        <div v-for="skill in filteredSkills" @click="selectSkill(skill)">{{ skill }}</div>
+                                    </div>
+                        
+                                    <button type="button" class="skill-button" @click="addSkill">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
+
 
                         <span class="preview-skill-container">
                             <div 
@@ -65,21 +80,16 @@ export default defineComponent({
     name: 'SkillsView',
     setup() {
         const store = useStore();
-        const skill = ref<Skill>({
-            user_id: store.state.user_id,
-            ID: 0,
-            skill_name: '',
-            skill_proficiency: 1,
-            created_by: 1, // Same as user_id
-            updated_by: 1, // Same as user_id
-            status: 1
-        });
-
+        const skill = ref({ skill_name: '' });
+        const allSkills = ref<Array<{ ID: number; name_eng: string }>>([]);
         const skills = ref<Skill[]>([]);
         const changedSkills = ref<number[]>([]);
         const get_user_api = store.state.host_url + "get-user-skill?user_id="+ store.state.user_id;
         const store_user_api = store.state.host_url + "user-skill";
         const update_skill_api = store.state.host_url + "user-skill/";
+        const suggestedSkills = ref<string[]>([]);
+        const filteredSkills = ref<string[]>([]);
+        const isAutocompleteVisible = ref(false);
 
         const trackChanges = (skillId: number) => {
             if (!changedSkills.value.includes(skillId)) {
@@ -101,7 +111,12 @@ export default defineComponent({
                 return;
             }
             try {
-                const response = await axios.post(store_user_api, skill.value);
+                const data = {
+                    skill_name: skill.value,
+                    user_id: store.state.user_id,
+                    skill_proficiency :1
+                }
+                const response =  await axios.post(store_user_api, data);
                 if (response.data.message === 'Record created successfully') {
                     skills.value.push(response.data.data);
                     skill.value.skill_name = ''; // Reset skill name after successful addition
@@ -152,15 +167,54 @@ export default defineComponent({
             changedSkills.value = []; // Reset after updating
         };
 
-        onMounted(fetchSkills);
+        onMounted(async () => {
+            try {
+                const skillsResponse = await axios.get(store.state.host_url + "skills");
+                if (skillsResponse.data && Array.isArray(skillsResponse.data)) {
+                    allSkills.value = skillsResponse.data;
+                }
+                fetchSkills();
+            } catch (error) {
+                console.error("Error fetching skills:", error);
+            }
+        });
 
+        const selectSkill = (selectedSkill: string) => {
+            skill.value.skill_name = selectedSkill;
+            filteredSkills.value = [];
+            isAutocompleteVisible.value = false;
+        }
+
+        const filterSkills = () => {
+            if (!skill.value || !skill.value.skill_name) {
+                filteredSkills.value = [];
+                isAutocompleteVisible.value = false;
+                return;
+            }
+
+            filteredSkills.value = allSkills.value
+                .map(skillItem => skillItem.name_eng)
+                .filter(name => name && name.toLowerCase().includes(skill.value.skill_name.toLowerCase()));
+
+            isAutocompleteVisible.value = filteredSkills.value.length > 0;
+        }
+
+
+     
+        // Function to set input value to selected suggestion
+       
         return {
             skill,
             skills,
             addSkill,
             deleteSkill,
             saveSkills,
-            trackChanges
+            trackChanges,
+            filterSkills,
+            suggestedSkills,
+            isAutocompleteVisible,
+            selectSkill,
+            filteredSkills 
         };
     }
 });
@@ -215,5 +269,23 @@ export default defineComponent({
                 *{font-size: 16px; color: $red-1;}
             }
         }
+    }
+    .autocomplete-suggestions {
+        border: 1px solid #ccc;
+        max-height: 150px;
+        overflow-y: auto;
+        position: absolute;  /* Temporarily added for troubleshooting */
+        background-color: white;  /* Temporarily added for troubleshooting */
+        width: 200px;  /* Adjust based on your design */
+        z-index: 1000;  /* Ensure it's above other elements */
+    }
+    .autocomplete-suggestions div {
+        padding: 8px 12px;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+    }
+
+    .autocomplete-suggestions div:hover {
+        background-color: #f7f7f7;
     }
 </style>
