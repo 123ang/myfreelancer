@@ -112,10 +112,11 @@ export default defineComponent({
             }
             try {
                 const data = {
-                    skill_name: skill.value,
+                    skill_name: skill.value.skill_name,
                     user_id: store.state.user_id,
                     skill_proficiency :1
                 }
+                console.log(data)
                 const response =  await axios.post(store_user_api, data);
                 if (response.data.message === 'Record created successfully') {
                     skills.value.push(response.data.data);

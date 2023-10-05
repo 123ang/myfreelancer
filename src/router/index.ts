@@ -76,12 +76,12 @@ const routes: Array<RouteRecordRaw> = [
     component: CreateOthersView
   },
   {
-    path: '/edit-experience',
+    path: '/edit-experience/:id',
     name: 'edit_experience',
     component: EditExperienceView
   },
   {
-    path: '/edit-education',
+    path: '/edit-education/:id',
     name: 'edit_education',
     component: EditEducationView
   },

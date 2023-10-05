@@ -92,7 +92,26 @@
         "addSkillLabel": "Tambah Kemahiran",
         "skillPlaceholder": "Tambah kemahiran anda di sini",
         "rateSkill": "* Nilai tahap kemahiran anda dari 1 hingga 5",
-        "save": "Simpan"
+        "save": "Simpan",
+        "expertiseSkills": "Kemahiran Pakar",
+        "noSkillsAdded": "Tiada kemahiran yang ditambah lagi",
+        "edit": "Sunting",
+        "workExperience": "Pengalaman Kerja",
+        "remove": "Buang",
+        "noExperienceInfo": "Tiada maklumat pengalaman.",
+        "experienceRemovedSuccessfully": "Pengalaman berjaya dibuang!",
+        "errorRemovingExperience": "Ralat membuang pengalaman.",
+        "networkError": "Ralat rangkaian. Sila cuba lagi.",
+        "Education": "Pendidikan",
+        "Edit": "Sunting",
+        "Remove": "Buang",
+        "NoEducationInfo": "Tiada maklumat pendidikan.",
+        "EducationRemovedSuccessfully": "Pendidikan berjaya dibuang.",
+        "ErrorRemovingEducation": "Ralat membuang pendidikan.",
+        "NetworkError": "Ralat rangkaian. Sila cuba lagi.",
+        "others": "Lain-lain",
+        "editWorkExperience": "Sunting Pengalaman Kerja"
+
 
     }
 }

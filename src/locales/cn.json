@@ -92,6 +92,25 @@
         "addSkillLabel": "添加技能",
         "skillPlaceholder": "在此添加您的技能",
         "rateSkill": "* 请对您的技能等级进行1至5的评价",
-        "save": "保存"
+        "save": "保存",
+        "expertiseSkills": "专业技能",
+        "noSkillsAdded": "尚未添加技能",
+        "edit": "编辑",
+        "workExperience": "工作经验",
+        "remove": "移除",
+        "noExperienceInfo": "没有工作经验信息。",
+        "experienceRemovedSuccessfully": "成功删除工作经验！",
+        "errorRemovingExperience": "删除工作经验时出错。",
+        "networkError": "网络错误。请再试一次。",
+        "Education": "教育",
+        "Edit": "编辑",
+        "Remove": "移除",
+        "NoEducationInfo": "没有教育信息。",
+        "EducationRemovedSuccessfully": "成功删除教育信息。",
+        "ErrorRemovingEducation": "删除教育信息时出错。",
+        "NetworkError": "网络错误。请再试一次。",
+        "others": "其他",
+        "editWorkExperience": "编辑工作经验"
+
     }
 }

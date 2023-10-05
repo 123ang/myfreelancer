@@ -93,6 +93,24 @@
         "addSkillLabel": "Add Skill",
         "skillPlaceholder":"Add your skill here",
         "rateSkill": "* Rate your skill level from 1 to 5",
-        "save": "Save"
+        "save": "Save",
+        "expertiseSkills": "Expertise Skills",
+        "noSkillsAdded": "No skills added yet",
+        "edit": "Edit",
+        "workExperience": "Work Experience",
+        "remove": "Remove",
+        "noExperienceInfo": "No experience information.",
+        "experienceRemovedSuccessfully": "Experience removed successfully!",
+        "errorRemovingExperience": "Error removing experience.",
+        "networkError": "Network error. Please try again.",
+        "Education": "Education",
+        "Edit": "Edit",
+        "Remove": "Remove",
+        "NoEducationInfo": "No education information.",
+        "EducationRemovedSuccessfully": "Education removed successfully.",
+        "ErrorRemovingEducation": "Error removing education.",
+        "NetworkError": "Network error. Please try again.",
+        "others": "Others",
+        "editWorkExperience": "Edit Work Experience"
     }
 }
