@@ -25,6 +25,10 @@
                 border: 1px solid $font-main;
                 color: $font-main;
                 opacity: .75;
+                max-width: 120px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
             }
         }
 

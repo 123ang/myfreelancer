@@ -19,6 +19,7 @@ import FreelancerProject from '../views/FreelancerProject/FreelancerProject.vue'
 import FreelancerView from '../views/FreelancerView/FreelancerView.vue'
 import SkillsView from '../views/SkillsView/SkillsView.vue'
 import AllProjectsView from '../views/AllProjectsView/AllProjectsView.vue'
+import AllFreelancersView from '../views/AllFreelancersView/AllFreelancersView.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -120,6 +121,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/all-projects',
     name: 'all-projects',
     component: AllProjectsView
+  },
+  {
+    path: '/all-freelancers',
+    name: 'all-freelancers',
+    component: AllFreelancersView
   },
 ]
 

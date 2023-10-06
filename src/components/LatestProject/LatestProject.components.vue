@@ -22,13 +22,13 @@
 
               <!-- VIEW MORE CARD -->
               <div class="card-container view-more">
-                <div class="card">
-                  <a href="#view-more">
+                <a href="/all-projects">
+                  <div class="card">
                     <div class="button">
                       <h4>{{$t('message.viewMore')}}</h4>
                     </div>
-                  </a>
-                </div>
+                  </div>
+                </a>
               </div>
 
           </div>

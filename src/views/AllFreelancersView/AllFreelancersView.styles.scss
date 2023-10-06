@@ -72,8 +72,11 @@
             .skill-container{
                 display: flex;
                 gap: .5rem 1rem;
-                margin-block: .75rem;
+                margin-block: .75rem .15rem;
                 flex-wrap: wrap;
+                align-items: center;
+    
+                i{color: $main-1;}
     
                 .badge{
                     padding: .15rem .5rem;
@@ -87,6 +90,15 @@
                     text-overflow: ellipsis;
                 }
             }    
+
+            .language-container{
+                display: flex;
+                gap: 1rem;
+                margin-bottom: 2rem;
+                align-items: baseline;
+
+                p{min-width: fit-content;}
+            }
 
             .button-container{
                 text-align: center;

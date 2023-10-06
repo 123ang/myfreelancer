@@ -32,29 +32,46 @@
       <div class="projects-container grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-4">
 
         <!-- Loop through projects and display them -->
+        
         <div class="card-container">
             <div class="card">
-                <h4>  project </h4>
+                <h4>  Freelancer </h4>
+
+                <!-- skill -->
                 <div class="skill-container">
-                    <small class="badge">
-                         skill
-                    </small>
+                  <small class="badge">skill</small>
+                  <small class="badge">skill</small>
+                  <small class="badge">skill</small>
+                  <small class="badge">skill</small>
+                  <small class="badge">skill</small>
+                  <small class="badge">skill</small>
+                  <small class="badge">skill</small>
+                  <small class="badge">skill</small>
+                  <small class="badge">skill</small>
+                  <small class="badge">skill</small>
                 </div>
-                <hr class="my-3 mt-auto">
-                <!-- Price -->
-                <div class="d-flex mb-3">
-                    <p> Price : </p>
-                    <div class="ms-2 d-flex">
-                        <p>RM</p>
-                        <p> 0.00 </p>
-                    </div>
-                </div>
-                <!-- Bids (you may need to adjust according to your data structure) -->
-                <div class="d-flex mb-3" hidden>
-                    <p> Bids : </p>
-                    <div class="ms-2 d-flex">0</div>
-                </div>
+
+                <hr class="my-3">
                 
+                <div class="d-flex mb-3">
+                    <p> Experience Year : </p>
+                    <div class="ms-2 d-flex">5</div>
+                </div>
+                <div class="d-flex mb-3">
+                    <p> Expected Payment (RM / hour) : </p>
+                    <div class="ms-2 d-flex">5.00</div>
+                </div>
+
+                <hr class="my-3">
+
+                <div class="language-container">
+                  <p class="me-2"> Language : </p>
+                  <div class="skill-container">
+                    <small class="badge">Malay</small>
+                    <small class="badge">English</small>
+                  </div>
+                </div>
+
                 <div class="button-container my-3">
                   <a href="/project/:id">
                     <button>View</button>
@@ -62,7 +79,9 @@
                 </div>
             </div>  
         </div>    
-    </div>
+
+
+      </div>
     </div>
 
   </div>
@@ -72,7 +91,7 @@
 import { defineComponent, onMounted } from 'vue';
 
 export default defineComponent({
-  name: 'AllProjectsView',
+  name: 'AllFreelancersView',
   setup() {
   }
 });
@@ -80,5 +99,5 @@ export default defineComponent({
 
 <style lang="scss" scoped>
   @import '@/assets/styles/global.styles.scss';
-  @import './AllProjectsView.styles.scss';
+  @import './AllFreelancersView.styles.scss';
 </style>
