@@ -18,6 +18,9 @@ import AccountView from '../views/AccountView/AccountView.vue'
 import FreelancerProject from '../views/FreelancerProject/FreelancerProject.vue'
 import FreelancerView from '../views/FreelancerView/FreelancerView.vue'
 import SkillsView from '../views/SkillsView/SkillsView.vue'
+import FreelancersView from '../views/FreelancersView/FreelancersView.vue'
+import ProjectsView from '../views/ProjectsView/ProjectsView.vue'
+
 import store from '@/store'; 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -126,6 +129,16 @@ const routes: Array<RouteRecordRaw> = [
     component: FreelancerView
   },
   {
+    path: '/freelancers',
+    name: 'freelancers',
+    component: FreelancersView
+  },
+  {
+    path: '/projects',
+    name: 'projects',
+    component: ProjectsView
+  },
+  {
     path: '/expertise-skills',
     name: 'expertise-skills',
     component: SkillsView,
@@ -143,7 +156,8 @@ function isAuthenticated() {
 }
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'login' && !isAuthenticated()) {
+  if (to.matched.some(record => record.meta.requiresAuth) && !isAuthenticated()) {
+    // Redirect to login page if the route requires authentication and the user is not authenticated
     next({ name: 'login' });
   } else {
     next();

@@ -110,7 +110,18 @@
         "ErrorRemovingEducation": "Ralat membuang pendidikan.",
         "NetworkError": "Ralat rangkaian. Sila cuba lagi.",
         "others": "Lain-lain",
-        "editWorkExperience": "Sunting Pengalaman Kerja"
+        "editWorkExperience": "Sunting Pengalaman Kerja",
+        "Create Project": "Buat Projek",
+        "closeProject": "Adakah anda pasti mahu menutup projek ini?",
+        "deleteProject": "Adakah anda pasti mahu memadam projek ini?",
+        "wontRevert": "Anda tidak akan dapat memulihkannya!",
+        "yesClose": "Ya, tutup ia!",
+        "yesDelete": "Ya, padamkan ia!",
+        "noCancel": "Tidak, batalkan!",
+        "project_closed": "Projek anda telah ditutup.",
+        "project_deleted": "Projek anda telah dipadam.",
+        "closeProjectError": "Terdapat ralat menutup projek.",
+        "deleteProjectError": "Terdapat ralat memadam projek."
 
 
     }

@@ -111,6 +111,19 @@
         "ErrorRemovingEducation": "Error removing education.",
         "NetworkError": "Network error. Please try again.",
         "others": "Others",
-        "editWorkExperience": "Edit Work Experience"
+        "editWorkExperience": "Edit Work Experience",
+        "Create Project": "Create Project",
+        "closeProject": "Are you sure you want to close this project?",
+        "deleteProject": "Are you sure you want to delete this project?",
+        "wontRevert": "You won't be able to revert this!",
+        "yesClose": "Yes, close it!",
+        "yesDelete": "Yes, delete it!",
+        "noCancel": "No, cancel!",
+        "project_closed": "Your project has been closed.",
+        "project_deleted": "Your project has been deleted.",
+        "closeProjectError": "There was an error closing the project.",
+        "deleteProjectError": "There was an error deleting the project.",
+        "noSkill": "No Skill Requirement",
+        "viewDetails": "VIEW DETAILS"
     }
 }

@@ -110,7 +110,18 @@
         "ErrorRemovingEducation": "删除教育信息时出错。",
         "NetworkError": "网络错误。请再试一次。",
         "others": "其他",
-        "editWorkExperience": "编辑工作经验"
+        "editWorkExperience": "编辑工作经验",
+        "Create Project": "创建项目",
+        "closeProject": "你确定要关闭这个项目吗？",
+        "deleteProject": "你确定要删除这个项目吗？",
+        "wontRevert": "你将无法恢复它！",
+        "yesClose": "是的，关闭它！",
+        "yesDelete": "是的，删除它！",
+        "noCancel": "不，取消！",
+        "project_closed": "您的项目已被关闭。",
+        "project_deleted": "您的项目已被删除。",
+        "closeProjectError": "关闭项目时出错。",
+        "deleteProjectError": "删除项目时出错。"
 
     }
 }
