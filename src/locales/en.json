@@ -31,7 +31,7 @@
         "postYourProject": "Post Your Project & Find Talent.",
         "uploadProject": "UPLOAD PROJECT",
         "latestProject": "Latest Project",
-        "latestProjectDescription": "For detailed information on any project, please click 'View More'. If you're interested in advertising your project in this section, kindly reach out to us at angjinsheng@gmail.com.",
+        "latestProjectDescription": "For detailed information on any project, please click 'View More'. If you're interested in advertising your project in this section, kindly reach out to us at {email}.",
         "noProjectTitle": "No Latest Project",
         "noProjectDescription": "Please create your own project",
         "viewMore": "VIEW MORE",

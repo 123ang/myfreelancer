@@ -30,7 +30,7 @@
         "postYourProject": "发布您的项目并寻找才华横溢的人才。",
         "uploadProject": "上传项目",
         "latestProject": "最新的项目",
-        "latestProjectDescription": "如需查看任何项目的详细信息，请点击“查看更多”。如果您有兴趣在此部分发布您的项目，请通过angjinsheng@gmail.com与我们联系。",
+        "latestProjectDescription": "如需查看任何项目的详细信息，请点击“查看更多”。如果您有兴趣在此部分发布您的项目，请通过{email}与我们联系。",
         "noProjectTitle": "没有最新的项目",
         "noProjectDescription": "请创建您自己的项目",
         "viewMore": "查看更多",

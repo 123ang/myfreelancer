@@ -3,7 +3,8 @@
       <div class="container">
           <div class="text-center mb-5">
               <h2 class="title">{{$t('message.latestProject')}}</h2>
-              <p>{{$t('message.latestProjectDescription')}}</p>
+              <p>{{ $t('message.latestProjectDescription', { email: 'myfreelancermy@gmail.com' }) }}
+</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
 
@@ -19,17 +20,16 @@
                     </div>
                 </div>
               </div>
-
+              <a href="/projects">
               <!-- VIEW MORE CARD -->
-              <div class="card-container view-more">
-                <div class="card">
-                  <a href="#view-more">
-                    <div class="button">
-                      <h4>{{$t('message.viewMore')}}</h4>
-                    </div>
-                  </a>
+                <div class="card-container view-more">
+                  <div class="card">
+                      <div class="button">
+                        <h4>{{$t('message.viewMore')}}</h4>
+                      </div>
+                  </div>
                 </div>
-              </div>
+              </a>
           </div>
       </div>
   </section>
