@@ -7,11 +7,13 @@
         border-radius: $radius-1;
         padding: 1rem;
         flex-wrap: wrap;
+        height: 100%;
 
         .skill-container{
             display: flex;
             gap: .5rem 1rem;
             margin-block: .75rem;
+            flex-wrap: wrap;
 
             .badge{
                 padding: .15rem .5rem;

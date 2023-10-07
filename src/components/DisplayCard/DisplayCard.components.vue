@@ -5,7 +5,7 @@
             <div class="skill-container">
                 <small class="badge" v-for="skill in data.project_skills" :key="skill.ID">{{ skill.skill_name || $t('message.noSkill') }}</small>
             </div>
-            <hr class="my-3">
+            <hr class="my-3 mt-auto">
             <div class="d-flex mb-3">
                 <p>{{$t('message.price')}}: </p>
                 <div class="ms-2 d-flex">
