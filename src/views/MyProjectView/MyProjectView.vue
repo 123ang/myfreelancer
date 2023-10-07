@@ -89,11 +89,7 @@
                         </div>
                         <!-- Buttons (adjust href as needed) -->
                         <div class="button-container my-3 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <a :href="'/project/' + project.ID" class="button view">{{ $t('message.view') }}</a>
-                            <!-- Add the actual links or methods for update, close, and delete -->
-                            <a href="#update" class="button update">{{ $t('message.update') }}</a>
-                            <a @click="closeProject(project.ID)" class="button close">{{ $t('message.close') }}</a>
-                            <a @click="deleteProject(project.ID)" class="button delete">{{ $t('message.delete') }}</a>
+                            <a :href="'/project/' + project.ID" class="button view">{{ $t('message.view') }}</a>                       
                         </div>
                     </div>  
                 </div>    
@@ -108,6 +104,8 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import axios from 'axios'; // Ensure you have axios installed and imported
 import { useStore } from 'vuex';
+import Swal from 'sweetalert2';
+import { useI18n } from 'vue-i18n';
 
 interface ProjectSkill {
   ID: number;
@@ -152,6 +150,7 @@ export default defineComponent({
     const projects = ref<Project[]>([]);
     const store = useStore();
     const apiUrl = store.state.host_url + "my_project";
+    const { t } = useI18n();
     const fetchProjects = async () => {
       try {
         const response = await axios.post(apiUrl, {
@@ -168,23 +167,46 @@ export default defineComponent({
 
     const closeProject = async (projectId: number) => {
       try {
-        await axios.post(`${store.state.host_url}project/${projectId}/close`);
-        console.log("Project closed successfully");
-        fetchProjects(); 
+        const result = await Swal.fire({
+          title: t('message.closeProject'),
+          text: t('message.wontRevert'),
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: t('message.yesClose'),
+          cancelButtonText: t('message.noCancel')
+        });
+        
+        if (result.isConfirmed) {
+          await axios.post(`${store.state.host_url}project/${projectId}/close`);
+          Swal.fire('Closed!', t('message.project_closed'), 'success');
+          fetchProjects(); 
+        }
       } catch (error) {
-        console.error("Error closing project:", error);
+        Swal.fire('Error!', t('message.closeProjectError'), 'error');
       }
     };
 
     const deleteProject = async (projectId: number) => {
       try {
-        await axios.post(`${store.state.host_url}project/${projectId}/delete`);
-        console.log("Project deleted successfully");
-        fetchProjects(); 
+        const result = await Swal.fire({
+          title: t('message.deleteProject'),
+          text: t('message.wontRevert'),
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: t('message.yesDelete'),
+          cancelButtonText: t('message.noCancel')
+        });
+        
+        if (result.isConfirmed) {
+          await axios.post(`${store.state.host_url}project/${projectId}/delete`);
+          Swal.fire('Deleted!', t('message.project_deleted'), 'success');
+          fetchProjects(); 
+        }
       } catch (error) {
-        console.error("Error deleting project:", error);
+        Swal.fire('Error!', t('message.deleteProjectError'), 'error');
       }
     };
+
     onMounted(fetchProjects);
     return {
       projects,

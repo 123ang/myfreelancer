@@ -4,38 +4,39 @@
             <div class="card">
                 <a class="back-button" href="javascript:history.back()"><i class="fas fa-chevron-left me-2"></i>Back</a>
                 
-                <h2 class="mb-5 text-center">Add Work Experience</h2>
+                <h2 class="mb-5 text-center">{{ $t('message.add_work_experience') }}</h2>
 
                 <div class="form-container">
-                    <form>
+                    <form @submit.prevent="addExperience">
+
                         <div class="row">
 
                             <!-- job title -->
                             <div class="col-12">
                                 <div class="input-container">
-                                    <div class="login-form-container">                  
-                                        <label for="job-title">Job Title:</label>
-                                        <input type="text" >
-                                    </div>
+                                <div class="login-form-container">
+                                    <label for="job-title">{{ $t('message.job_title') }}:</label>
+                                    <input v-model="experience.title" type="text" :placeholder="$t('message.job_title')">
+                                </div>
                                 </div>
                             </div>
 
                             <!-- company name -->
                             <div class="col-12">
                                 <div class="input-container">
-                                    <div class="login-form-container">                  
-                                        <label for="company-name">Company Name:</label>
-                                        <input type="text" >
-                                    </div>
+                                <div class="login-form-container">
+                                    <label for="company-name">{{ $t('message.company_name') }}:</label>
+                                    <input v-model="experience.company" type="text" :placeholder="$t('message.company_name')">
+                                </div>
                                 </div>
                             </div>
 
                             <!-- from period -->
                             <div class="col-6">
                                 <div class="input-container">
-                                    <div class="login-form-container">                  
-                                        <label for="from-period">From Period:</label>
-                                        <input type="date" >
+                                    <div class="login-form-container">
+                                        <label for="from-period">{{ $t('message.from_period') }}:</label>
+                                        <input type="date" v-model="experience.from_period">
                                     </div>
                                 </div>
                             </div>
@@ -43,12 +44,12 @@
                             <!-- to period -->
                             <div class="col-6">
                                 <div class="input-container">
-                                    <div class="login-form-container">                  
-                                        <label for="to-period">To Period:</label>
-                                        <input type="date" id="to_period" value="">
-                                        <label for="is_current" class="d-flex align-items-center my-2" @click="isCurrentChecked">
-                                            <div><input type="checkbox" id="is_current"></div>
-                                            <div class="ms-2">until current</div>
+                                    <div class="login-form-container">
+                                        <label for="to-period">{{ $t('message.to_period') }}:</label>
+                                        <input type="date" v-model="experience.to_period" :disabled="experience.currently_work_here">
+                                        <label for="is_current" class="d-flex align-items-center my-2" @click="toggleCurrentlyWorkHere">
+                                            <div><input type="checkbox" v-model="experience.currently_work_here"></div>
+                                            <div class="ms-2">{{ $t('message.currently_work_here') }}</div>
                                         </label>
                                     </div>
                                 </div>
@@ -57,17 +58,18 @@
                             <!-- Description -->
                             <div class="col-12">
                                 <div class="input-container">
-                                    <div class="login-form-container">                  
-                                        <label for="description">Description (optional) :</label>
-                                        <textarea id="description" name="description" rows="5"></textarea>
+                                    <div class="login-form-container">
+                                        <label for="description">{{ $t('message.description') }} {{ $t('message.optional') }}:</label>
+                                        <textarea v-model="experience.description" rows="5"></textarea>
                                     </div>
                                 </div>
                             </div>
 
+
                         </div>
 
                         <div class="submit-button">
-                            <button class="button-main login" type="submit">Add</button>
+                            <button class="button-main login" type="submit">{{$t('message.add')}}</button>
                         </div>
                     </form>
                 </div>
@@ -78,41 +80,76 @@
 
 
 <script lang="ts">
-
-import { defineComponent, onMounted } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
+import axios from 'axios';
+import { useStore } from 'vuex';
+interface Experience {
+    user_id: number | null;
+    title: string;
+    company: string;
+    from_period: Date | null;
+    to_period: Date | null;
+    currently_work_here: boolean;
+    description: string;
+}
 
 export default defineComponent({
-  name: 'CreateExperienceView',
-  setup() {
-    let toPeriod:HTMLInputElement;
-    let isCurrent:HTMLInputElement;
-    
-    // check is until_current checkbox checked
-    const isCurrentChecked = ():void => {
-        if (isCurrent?.checked) {
-            toPeriod.setAttribute('type', 'text')
-            toPeriod.setAttribute('disabled', 'false');
-            toPeriod.value = 'current'            
-        } else {
-            toPeriod.setAttribute('type', 'date')
-            toPeriod.removeAttribute('disabled')
-            toPeriod.value = '';
+    name: 'CreateExperienceView',
+    setup() {
+        const store = useStore();
+        const experience = ref<Experience>({
+            user_id: store.state.user_id,
+            title: '',
+            company: '',
+            from_period: null,
+            to_period: null,
+            currently_work_here: false,
+            description: ''
+        });
+
+        const addExperience = async () => {
+            if (!experience.value.title || !experience.value.company || !experience.value.from_period) {
+                alert('Please fill in all the required fields.');
+                return;
+            }
+
+            try {
+                const apiUrl = store.state.host_url + "user-experience";
+                const response = await axios.post(apiUrl, experience.value);
+
+                if (response.data.message === 'Work experience added successfully.') {
+                    alert(response.data.message);
+                    Object.assign(experience.value, {
+                        user_id: store.state.user_id,
+                        title: '',
+                        company: '',
+                        from_period: null,
+                        to_period: null,
+                        currently_work_here: false,
+                        description: ''
+                    });
+                } else {
+                    alert('Error adding work experience: ' + (response.data.message || 'Unknown error'));
+                }
+            } catch (error) {
+                alert('Error adding work experience.');
+            }
+        };
+
+        const toggleCurrentlyWorkHere = () => {
+            experience.value.currently_work_here = !experience.value.currently_work_here;
+            if (experience.value.currently_work_here) {
+                experience.value.to_period = null;
+            }
         }
-    }
 
-    onMounted(()=>{
-        toPeriod = document.querySelector('#to_period')!;
-        isCurrent = document.querySelector('#is_current')!;
-        isCurrentChecked()
-        
-    }) 
-
-    return {
-        isCurrentChecked
+        return {
+            experience,
+            addExperience,
+            toggleCurrentlyWorkHere
+        };
     }
-  }
 });
-
 </script>
 
   

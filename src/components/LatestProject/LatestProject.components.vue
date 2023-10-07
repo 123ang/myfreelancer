@@ -3,11 +3,12 @@
       <div class="container">
           <div class="text-center mb-5">
               <h2 class="title">{{$t('message.latestProject')}}</h2>
-              <p>{{$t('message.latestProjectDescription')}}</p>
+              <p>{{ $t('message.latestProjectDescription', { email: 'myfreelancermy@gmail.com' }) }}
+</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
 
-              <!-- card -->
+              <!-- Display Cards -->
               <DisplayCard v-if="cardDatas.length > 0" :CardDatas="cardDatas" />
 
               <!-- If there is no latest project -->
@@ -19,7 +20,7 @@
                     </div>
                 </div>
               </div>
-
+              <a href="/projects">
               <!-- VIEW MORE CARD -->
               <div class="card-container view-more">
                 <a href="/all-projects">
@@ -36,34 +37,41 @@
   </section>
 </template>
 
-
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import DisplayCard from '../DisplayCard/DisplayCard.components.vue'
-import CardDetails from '../DisplayCard/types'
-
+import { defineComponent, ref, onMounted } from 'vue';
+import axios from 'axios';
+import DisplayCard from '../DisplayCard/DisplayCard.components.vue';
+import CardDetails from '../DisplayCard/types';
+import { useStore } from 'vuex';
 export default defineComponent({
   name: 'Latestproject',
   components: {
     DisplayCard,
   },
-  props: {},
   setup() {
-    const dummyData: CardDetails[] = [
-        {id: '1',title:'Title 1', skill: ['Vuejs'], price: 100, url: '#title1'},
-        {id: '2',title:'Title 2', skill: ['JS', 'PHP'], price: 100, url: '#title2'},
-        {id: '3',title:'Title 3', skill: [''], price: 100, url: '#title3'},
-    ];
+    const cardDatas = ref<CardDetails[]>([]);
+    const store = useStore();
+    const fetchLatestProjects = async () => {
+      try {
+        const apiUrl = store.state.host_url + 'latest-projects';
+        const response = await axios.get(apiUrl); // Modify to the correct endpoint
+        if (response.data && response.data.projects) {
+          cardDatas.value = response.data.projects;
+        }
+      } catch (error) {
+        console.error('Error fetching latest projects:', error);
+      }
+    };
 
-    const cardDatas = ref<CardDetails[]>(dummyData) 
+    onMounted(fetchLatestProjects);
 
-    return{
-        cardDatas
+    return {
+      cardDatas
     }
   },
 });
-
 </script>
+
 
 <style lang="scss" scoped>
   @import '@/assets/styles/global.styles.scss';

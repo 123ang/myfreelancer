@@ -28,8 +28,8 @@
 
                     <div class="login-form-container row gy-5 gy-lg-0">
                         <div class="col-lg-6 px-0 px-lg-2">
-                            <label for="email">{{ $t('message.email') }}</label>
-                            <input type="email" name="email" id="email" :placeholder="$t('message.email')" v-model="formData.email">
+                            <label for="email">{{ $t('message.Email') }}</label>
+                            <input type="email" name="email" id="email" :placeholder="$t('message.Email')" v-model="formData.email">
                         </div>
                         <div class="col-lg-6 px-0 px-lg-2">
                             <label for="phone">{{ $t('message.phone') }}</label>
@@ -38,8 +38,8 @@
                     </div>
 
                     <div class="login-form-container">               
-                        <label for="password">{{ $t('message.password') }}</label>
-                        <input type="password" name="password" id="password" :placeholder="$t('message.password')" v-model="formData.password">
+                        <label for="password">{{ $t('message.Password') }}</label>
+                        <input type="password" name="password" id="password" :placeholder="$t('message.Password')" v-model="formData.password">
                     </div>
 
                     <div class="login-form-container">               

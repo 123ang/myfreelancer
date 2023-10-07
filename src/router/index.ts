@@ -20,6 +20,10 @@ import FreelancerView from '../views/FreelancerView/FreelancerView.vue'
 import SkillsView from '../views/SkillsView/SkillsView.vue'
 import AllProjectsView from '../views/AllProjectsView/AllProjectsView.vue'
 import AllFreelancersView from '../views/AllFreelancersView/AllFreelancersView.vue'
+import FreelancersView from '../views/FreelancersView/FreelancersView.vue'
+import ProjectsView from '../views/ProjectsView/ProjectsView.vue'
+
+import store from '@/store'; 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -39,7 +43,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/change-password',
     name: 'change_password',
-    component: ChangePasswordView
+    component: ChangePasswordView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/register',
@@ -49,58 +54,71 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/my-project',
     name: 'my_project',
-    component: MyProjectView
+    component: MyProjectView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/project/:id',
     name: 'ProjectView',
     component: ProjectView,
-    props: true // This ensures that the `:id` parameter is passed as a prop to the ProjectView component
+    props: true,
+    meta: { requiresAuth: true }
   },
   {
     path: '/create-project',
     name: 'create_project',
-    component: CreateProjectView
+    component: CreateProjectView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/create-experience',
     name: 'create_experience',
-    component: CreateExperienceView
+    component: CreateExperienceView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/create-education',
     name: 'create_education',
-    component: CreateEducationView
+    component: CreateEducationView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/create-others',
     name: 'create_others',
-    component: CreateOthersView
+    component: CreateOthersView,
+    meta: { requiresAuth: true }
   },
   {
-    path: '/edit-experience',
+    path: '/edit-experience/:id',
     name: 'edit_experience',
-    component: EditExperienceView
+    component: EditExperienceView,
+    props: true,
+    meta: { requiresAuth: true }
   },
   {
-    path: '/edit-education',
+    path: '/edit-education/:id',
     name: 'edit_education',
-    component: EditEducationView
+    component: EditEducationView,
+    props: true,
+    meta: { requiresAuth: true }
   },
   {
     path: '/edit-others',
     name: 'edit_others',
-    component: EditOthersView
+    component: EditOthersView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/edit-project',
     name: 'edit-project',
-    component: EditProjectView
+    component: EditProjectView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/my-account',
     name: 'my_account',
-    component: AccountView
+    component: AccountView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/freelancer-project',
@@ -113,9 +131,20 @@ const routes: Array<RouteRecordRaw> = [
     component: FreelancerView
   },
   {
+    path: '/freelancers',
+    name: 'freelancers',
+    component: FreelancersView
+  },
+  {
+    path: '/projects',
+    name: 'projects',
+    component: ProjectsView
+  },
+  {
     path: '/expertise-skills',
     name: 'expertise-skills',
-    component: SkillsView
+    component: SkillsView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/all-projects',
@@ -133,5 +162,18 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+function isAuthenticated() {
+  return store.state.is_login;
+}
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth) && !isAuthenticated()) {
+    // Redirect to login page if the route requires authentication and the user is not authenticated
+    next({ name: 'login' });
+  } else {
+    next();
+  }
+});
 
 export default router

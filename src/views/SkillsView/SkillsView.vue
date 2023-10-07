@@ -2,44 +2,55 @@
     <div class="body-section" id="expertise-skills">
         <div class="container">
             <div class="card">
-                <a class="back-button" href="javascript:history.back()"><i class="fas fa-chevron-left me-2"></i>Back</a>
+                <a class="back-button" href="javascript:history.back()"><i class="fas fa-chevron-left me-2"></i>{{ $t('message.back') }}</a>
                 
-                <h2 class="mb-5 text-center">Expertise Skills</h2>
+                <h2 class="mb-5 text-center">{{ $t('message.addExpertiseSkills') }}</h2>
 
                 <div class="form-container">
-                    <form>
+                    <form @submit.prevent="saveSkills">
                         <div class="input-container">
                             <div class="login-form-container">                  
-                                <label for="skill_name">Add skill:</label>
+                                <label for="skill_name">{{ $t('message.addSkillLabel') }}</label>
                                 <div class="d-flex add-skill-container">
-                                    <input type="text" id="skill_name">
-                                    <button type="button" class="skill-button"><i class="fas fa-plus"></i></button>
+        
+                                    <input 
+                                        type="text" 
+                                        v-model="skill.skill_name" 
+                                        :placeholder="$t('message.skillPlaceholder')" 
+                                        @input="filterSkills"
+                                    >
+                                    <!-- Autocomplete suggestions -->
+
+                                    <div class="autocomplete-suggestions" v-if="isAutocompleteVisible">
+                                        <div v-for="skill in filteredSkills" @click="selectSkill(skill)">{{ skill }}</div>
+                                    </div>
+                        
+                                    <button type="button" class="skill-button" @click="addSkill">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- preview -->
+
                         <span class="preview-skill-container">
-                            <!-- <div class="skill-bar" id="skill-bar-1">
-                                <select id="skill_1">
-                                    <option value="1" selected>1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>  
-                                <h5>Skill 1</h5>                          
-                                <button class="remove-skill" type="button"><i class="fas fa-trash-alt"></i></button>                                                
-                            </div> -->
+                            <div 
+                                class="skill-bar" 
+                                v-for="s in skills" 
+                                :key="s.ID">
+                                <select v-model="s.skill_proficiency" @change="trackChanges(s.ID)">
+                                    <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
+                                </select>
+                                <h5>{{ s.skill_name }}</h5>
+                                <button type="button" class="remove-skill" @click="deleteSkill(s.ID)"><i class="fas fa-trash-alt"></i></button>
+                            </div>
                         </span>
 
-                        <small>* Rate your skill level from 1 to 5</small>
+                        <small>{{ $t('message.rateSkill') }}</small>
 
                         <div class="submit-button">
                             <button class="button-main login" type="submit">
-                                {{
-                                    urlTitle === UrlParamTitle.edit ? 'Save Changes' : 'Save'
-                                }}
+                                {{ $t('message.save') }}
                             </button>
                         </div>
                     </form>
@@ -50,76 +61,164 @@
 </template>
 
 
-<script lang="ts">
 
-import { defineComponent, onMounted, ref } from 'vue';
+<script lang="ts">
+import { defineComponent, ref, onMounted } from 'vue';
+import axios from 'axios';
+import { useStore } from 'vuex';
+interface Skill {
+    user_id: number;
+    ID: number;
+    skill_name: string;
+    skill_proficiency: number;
+    created_by: number;
+    updated_by: number;
+    status: number;
+}
 
 export default defineComponent({
-  name: 'SkillsView',
-  setup() {
-    let bodySection:HTMLElement = document.querySelector('.body-section')!;
-    let skillInputContainer:HTMLInputElement = document.querySelector('.add-skill-container')!;
-    let previewContainer:HTMLInputElement = document.querySelector('.preview-skill-container')!;
+    name: 'SkillsView',
+    setup() {
+        const store = useStore();
+        const skill = ref({ skill_name: '' });
+        const allSkills = ref<Array<{ ID: number; name_eng: string }>>([]);
+        const skills = ref<Skill[]>([]);
+        const changedSkills = ref<number[]>([]);
+        const get_user_api = store.state.host_url + "get-user-skill?user_id="+ store.state.user_id;
+        const store_user_api = store.state.host_url + "user-skill";
+        const update_skill_api = store.state.host_url + "user-skill/";
+        const suggestedSkills = ref<string[]>([]);
+        const filteredSkills = ref<string[]>([]);
+        const isAutocompleteVisible = ref(false);
 
-    const UrlParamTitle = {
-        edit: 'edit',
-        add: 'add'
+        const trackChanges = (skillId: number) => {
+            if (!changedSkills.value.includes(skillId)) {
+                changedSkills.value.push(skillId);
+            }
+        };
+        const fetchSkills = async () => {
+            try {
+                const response = await axios.get(get_user_api);
+                skills.value = response.data.skills; // Assuming the endpoint returns an array of skills
+            } catch (error) {
+                alert('Error fetching skills.');
+            }
+        };
+
+        const addSkill = async () => {
+            if (!skill.value.skill_name.trim()) {
+                alert('Please enter a skill name.');
+                return;
+            }
+            try {
+                const data = {
+                    skill_name: skill.value.skill_name,
+                    user_id: store.state.user_id,
+                    skill_proficiency :1
+                }
+                console.log(data)
+                const response =  await axios.post(store_user_api, data);
+                if (response.data.message === 'Record created successfully') {
+                    skills.value.push(response.data.data);
+                    skill.value.skill_name = ''; // Reset skill name after successful addition
+                    alert(response.data.message);
+                } else {
+                    alert('Error adding skill.');
+                }
+            } catch (error) {
+                alert('Error adding skill.');
+            }
+        };
+
+        const deleteSkill = async (skillId: number) => {
+            try {
+                const delete_user_api = store.state.host_url + "user-skill/" + skillId;
+                const response = await axios.delete(delete_user_api);
+                if (response.data.message === 'Record status changed to 0 successfully') {
+                    const index = skills.value.findIndex(s => s.ID === skillId);
+                    if (index > -1) {
+                        skills.value.splice(index, 1);
+                    }
+                    alert(response.data.message);
+                } else {
+                    alert('Error deleting skill.');
+                }
+            } catch (error) {
+                alert('Error deleting skill.');
+            }
+        };
+
+       const saveSkills = async () => {
+            for (const skillId of changedSkills.value) {
+                const skillToUpdate = skills.value.find(s => s.ID === skillId);
+                if (skillToUpdate) {
+                    try {
+                        console.log(update_skill_api + skillId);
+                        console.log(skillToUpdate)
+                        const response = await axios.post(update_skill_api + skillId, skillToUpdate);
+                        if (response.data.message !== 'Record updated successfully') {
+                            alert(`Error updating skill: ${skillToUpdate.skill_name}`);
+                        }
+                    } catch (error) {
+                        alert(`Error updating skill: ${skillToUpdate.skill_name}`);
+                    }
+                }
+            }
+            alert('Skills updated successfully');
+            changedSkills.value = []; // Reset after updating
+        };
+
+        onMounted(async () => {
+            try {
+                const skillsResponse = await axios.get(store.state.host_url + "skills");
+                if (skillsResponse.data && Array.isArray(skillsResponse.data)) {
+                    allSkills.value = skillsResponse.data;
+                }
+                fetchSkills();
+            } catch (error) {
+                console.error("Error fetching skills:", error);
+            }
+        });
+
+        const selectSkill = (selectedSkill: string) => {
+            skill.value.skill_name = selectedSkill;
+            filteredSkills.value = [];
+            isAutocompleteVisible.value = false;
+        }
+
+        const filterSkills = () => {
+            if (!skill.value || !skill.value.skill_name) {
+                filteredSkills.value = [];
+                isAutocompleteVisible.value = false;
+                return;
+            }
+
+            filteredSkills.value = allSkills.value
+                .map(skillItem => skillItem.name_eng)
+                .filter(name => name && name.toLowerCase().includes(skill.value.skill_name.toLowerCase()));
+
+            isAutocompleteVisible.value = filteredSkills.value.length > 0;
+        }
+
+
+     
+        // Function to set input value to selected suggestion
+       
+        return {
+            skill,
+            skills,
+            addSkill,
+            deleteSkill,
+            saveSkills,
+            trackChanges,
+            filterSkills,
+            suggestedSkills,
+            isAutocompleteVisible,
+            selectSkill,
+            filteredSkills 
+        };
     }
-    
-    // Get Page theme from url
-    const urlParams = new URLSearchParams(window.location.search);    
-    const urlTitle = ref<string | null>(urlParams.get('title'));
-
-    // setup add skill input
-    const setupAddSkill = () => {
-        const addButton = skillInputContainer.querySelector('button');
-        const input = skillInputContainer.querySelector('input');
-        addButton?.addEventListener('click', ()=>{
-            if (!input?.value || !input.value.trim()) return;
-            const newDiv = document.createElement('div');
-            newDiv.classList.add('skill-bar');
-            newDiv.innerHTML = `
-                <select id="${input.value}">
-                    <option value="1" selected>1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>  
-                <h5>${input.value}</h5>                          
-                <button type="button" class="remove-skill"><i class="fas fa-trash-alt"></i></button>      
-            `
-            previewContainer.appendChild(newDiv);
-            input.value = '';
-
-            // setup remove button
-            const remove = newDiv.querySelector('.remove-skill');
-            remove?.addEventListener('click', ()=>{
-                newDiv.remove();
-            })            
-        })
-    }
-    
-    
-    onMounted(()=>{
-        bodySection = document.querySelector('.body-section')!;
-        skillInputContainer = document.querySelector('.add-skill-container')!;
-        previewContainer = document.querySelector('.preview-skill-container')!;
-
-        // add class to body-section
-        urlTitle.value && bodySection.classList.add(urlTitle.value);
-
-        setupAddSkill()
-
-    })
-
-    return{
-        urlTitle,
-        UrlParamTitle
-    }
-  }
 });
-
 </script>
 
   
@@ -171,5 +270,23 @@ export default defineComponent({
                 *{font-size: 16px; color: $red-1;}
             }
         }
+    }
+    .autocomplete-suggestions {
+        border: 1px solid #ccc;
+        max-height: 150px;
+        overflow-y: auto;
+        position: absolute;  /* Temporarily added for troubleshooting */
+        background-color: white;  /* Temporarily added for troubleshooting */
+        width: 200px;  /* Adjust based on your design */
+        z-index: 1000;  /* Ensure it's above other elements */
+    }
+    .autocomplete-suggestions div {
+        padding: 8px 12px;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+    }
+
+    .autocomplete-suggestions div:hover {
+        background-color: #f7f7f7;
     }
 </style>

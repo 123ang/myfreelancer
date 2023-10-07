@@ -5,8 +5,8 @@
               <h1 class="mb-2">{{ $t('message.MyFreeLancer') }}</h1>
               <h4 class="mb-2">{{ $t('message.MyFreeLancer is a dynamic platform connecting talented freelancers with businesses and individuals seeking specialized skills') }}</h4>
               <div class="hero-button-container">
-                  <a href="#"><HeroButton :title="$t('message.GET A FREELANCER')" /></a>
-                  <a href="#"><HeroButton :title="$t('message.START TO EARN MONEY')" /></a>
+                  <a href="/freelancers"><HeroButton :title="$t('message.GET A FREELANCER')" /></a>
+                  <a href="/projects"><HeroButton :title="$t('message.START TO EARN MONEY')" /></a>
               </div>
           </div>
       </div>

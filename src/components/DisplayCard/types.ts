@@ -1,9 +1,14 @@
-interface CartDetails {
-    id: string,
-    title: string,
-    skill: string[],
-    price: number,
-    url: string
+interface SkillDetail {
+    ID: string;
+    skill_name: string;
 }
 
-export default CartDetails
+interface CardDetails {
+    ID: string;
+    title: string;
+    project_skills: SkillDetail[];
+    budget: number;
+    url: string;
+}
+
+export default CardDetails;
