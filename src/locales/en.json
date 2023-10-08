@@ -124,6 +124,12 @@
         "closeProjectError": "There was an error closing the project.",
         "deleteProjectError": "There was an error deleting the project.",
         "noSkill": "No Skill Requirement",
-        "viewDetails": "VIEW DETAILS"
+        "viewDetails": "VIEW DETAILS",
+        "type_freelancer_name": "Freelancer's Name",
+        "skill": "Skill",
+        "all": "All",
+        "search": "Search",
+        "hourlyRate": "Hourly Rate"
+
     }
 }
