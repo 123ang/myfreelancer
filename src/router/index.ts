@@ -125,7 +125,7 @@ const routes: Array<RouteRecordRaw> = [
     component: FreelancerProject
   },
   {
-    path: '/freelancer/id',
+    path: '/freelancer/:freelancer_id',
     name: 'freelancer',
     props: true,
     component: FreelancerView
