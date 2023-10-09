@@ -14,7 +14,7 @@
                 <label for="skill">{{ $t('message.skill') }}</label>
                 <select v-model="filters.skill" name="skill" id="skill">
                     <option value="all">{{ $t('message.all') }}</option>
-                    <option v-for="skill in skills" :key="skill.ID" :value="skill.ID">{{ skill.name_eng }}</option>
+                    <option v-for="skill in skills" :key="skill.ID" :value="skill.name_eng">{{ skill.name_eng }}</option>
                 </select>
             </div>            
             <div class="col-lg-2">
