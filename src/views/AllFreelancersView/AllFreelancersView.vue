@@ -4,13 +4,13 @@
   <div class="search-container">
         <div class="container row">
             <!-- Filter by Name -->
-            <div class="input-container col-lg-4">
+            <div class="input-container col-lg-3">
                 <label for="name">{{ $t('message.Name') }}</label>
                 <input v-model="filters.name" type="text" id="name" :placeholder="$t('message.type_freelancer_name')">
             </div>
 
             <!-- Filter by Skill -->
-            <div class="dropdown-container col-lg-4">
+            <div class="dropdown-container col-lg-3">
                 <label for="skill">{{ $t('message.skill') }}</label>
                 <select v-model="filters.skill" name="skill" id="skill">
                     <option value="all">{{ $t('message.all') }}</option>
@@ -19,7 +19,7 @@
             </div>
 
             <!-- Filter by Hourly Rate -->
-            <div class="dropdown-container col-lg-4">
+            <div class="dropdown-container col-lg-3">
                 <label for="hourlyRate">{{ $t('message.hourlyRate') }}</label>
                 <select v-model="filters.hourlyRate" name="hourlyRate" id="hourlyRate">
                     <option value="all">{{ $t('message.all') }}</option>
@@ -32,7 +32,7 @@
             </div>
 
             <!-- Search Button -->
-            <div class="col-lg-12 mt-2">
+            <div class="col-lg-3 mt-2">
               <div class="button-container">
                 <button @click="fetchFreelancers" class="search-button" type="button">
                   <i class="fas fa-search"></i> {{ $t('message.search') }}
