@@ -20,7 +20,6 @@ import FreelancerView from '../views/FreelancerView/FreelancerView.vue'
 import SkillsView from '../views/SkillsView/SkillsView.vue'
 import AllProjectsView from '../views/AllProjectsView/AllProjectsView.vue'
 import AllFreelancersView from '../views/AllFreelancersView/AllFreelancersView.vue'
-import ProjectsView from '../views/ProjectsView/ProjectsView.vue'
 
 import store from '@/store'; 
 const routes: Array<RouteRecordRaw> = [
@@ -131,18 +130,13 @@ const routes: Array<RouteRecordRaw> = [
     component: FreelancerView
   },
   {
-    path: '/projects',
-    name: 'projects',
-    component: ProjectsView
-  },
-  {
     path: '/expertise-skills',
     name: 'expertise-skills',
     component: SkillsView,
     meta: { requiresAuth: true }
   },
   {
-    path: '/all-projects',
+    path: '/projects',
     name: 'all-projects',
     component: AllProjectsView
   },
