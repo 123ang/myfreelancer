@@ -2,7 +2,13 @@
   <div class="body-section">
     <div class="container">
         <div class="card" v-if="project">
-            <h2>{{ project.title }}</h2>
+            <div class="header-container">
+              <h2>{{ project.title }}</h2>
+              <!-- Conditional bid button -->
+              <div v-if="project.user_id !== storeUserId">
+                  <button class="bid-button">Bid</button>
+              </div>
+            </div>
             <p>{{ $t('message.description') }}: {{ project.description }}</p>
             <div class="skill-container">
               <small class="badge" v-if="!project.project_skills">{{ $t('message.noSkillRequirement') }}</small>
@@ -36,7 +42,7 @@
             <hr>            
 
             <!-- bidding list -->
-            <div class="bid-container" >
+            <div class="bid-container" v-if="project.user_id === storeUserId">
               <h5 class="mb-2">Bidding List</h5>
                 <table class="table table-striped">
                   <thead>
@@ -73,10 +79,7 @@
                   </tbody>
                 </table>
             </div>
-
         </div>     
-
-
 
         <div class="back-button">
             <a href="javascript:history.back()">{{ $t('message.back') }}</a>
@@ -84,7 +87,6 @@
     </div>
   </div>
 </template>
-
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
@@ -131,10 +133,11 @@ export default defineComponent({
   setup(props) {
     const project = ref<Project | null>(null);
     const store = useStore();
+    const storeUserId = store.state.user_id; // Assuming you have user_id in your Vuex store
+
     onMounted(async () => {
       try {
         const response = await axios.get(`${store.state.host_url}project/${props.id}`);
-        console.log(response.data)
         project.value = response.data.project;
       } catch (error) {
         console.error("Error fetching project:", error);
@@ -142,7 +145,8 @@ export default defineComponent({
     });
 
     return {
-      project
+      project,
+      storeUserId  // Making it available in the template
     };
   }
 });
@@ -152,4 +156,19 @@ export default defineComponent({
 <style lang="scss" scoped>
   @import '@/assets/styles/global.styles.scss';
   @import './ProjectView.styles.scss';
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .bid-button {
+    background-color: #007BFF;
+    color: #FFF;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 </style>

@@ -20,6 +20,7 @@
                     </div>
                 </div>
               </div>
+
               <!-- VIEW MORE CARD -->
               <div class="card-container view-more">
                 <a href="/all-projects">
