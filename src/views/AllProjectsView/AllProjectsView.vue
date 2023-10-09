@@ -148,7 +148,6 @@ export default defineComponent({
         const response = await axios.get(BASE_URL + "projects", {
           params: filters.value
         });
-        console.log("Projects Data:", response.data.data);
         projects.value = response.data.data;
       } catch (error) {
         console.error("Error fetching projects:", error);
