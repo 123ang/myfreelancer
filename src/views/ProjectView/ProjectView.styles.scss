@@ -25,10 +25,10 @@
                 border: 1px solid $font-main;
                 color: $font-main;
                 opacity: .75;
-                max-width: 120px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                // max-width: 120px;
+                // white-space: nowrap;
+                // overflow: hidden;
+                // text-overflow: ellipsis;
             }
         }
 
@@ -67,6 +67,51 @@
                     &.reject{
                         color: $red-1;
                     }
+                }
+            }
+        }
+
+        .bidding-container{
+            width: 90%;
+            max-width: 500px;
+            margin-inline: auto;
+            margin-bottom: .5rem;
+            
+            .input-container{
+                display: flex;
+        
+                input{
+                    width: 100%;
+                    flex: 1;
+                    border-radius: $radius-1 0 0  $radius-1;
+                    border: 1px solid $main-1;
+                    padding: .25rem 1rem;
+        
+                    &:focus-within{
+                        outline: 1px solid $main-3;
+                    }
+                }
+                
+                button{
+                    width: 100%;
+                    height: 100%;
+                    max-width: fit-content;
+                    padding: .5rem 1.5rem;
+                    border-radius: 0 $radius-1 $radius-1 0;
+                    color: #fff;
+                    background-color: $main-1;
+                    border: 1px solid $main-1;
+                }
+            }
+
+            .cancel-container{
+                button{
+                    width: 100%;
+                    height: 100%;
+                    max-width: fit-content;
+                    padding: .5rem 1.5rem;
+                    border-radius: $radius-1;
+                    color: #fff;
                 }
             }
         }

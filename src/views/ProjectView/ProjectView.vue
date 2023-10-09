@@ -3,11 +3,7 @@
     <div class="container">
         <div class="card" v-if="project">
             <div class="header-container">
-              <h2>{{ project.title }}</h2>
-              <!-- Conditional bid button -->
-              <div v-if="project.user_id !== storeUserId">
-                  <button class="bid-button">Bid</button>
-              </div>
+              <h2>{{ project.title }}</h2>              
             </div>
             <p>{{ $t('message.description') }}: {{ project.description }}</p>
             <div class="skill-container">
@@ -78,6 +74,23 @@
                     </tr>
                   </tbody>
                 </table>
+            </div>
+
+            <!-- Conditional bid button -->
+            <div v-if="project.user_id !== storeUserId">
+              <div class="bidding-container" >
+                <label class="mb-2">Your bids (RM) : </label>                                          
+                <div class="input-container">
+                  <input type="number" >
+                  <button>Bids</button>
+                </div>
+              </div>
+              <div class="bidding-container text-center" >
+                <div class="cancel-container mb-2">
+                  <button class="bg-gray-400">Cancel</button>
+                </div>
+                <label class="mb-2">Your bids (RM) : 100.00</label>                                          
+              </div>
             </div>
         </div>     
 

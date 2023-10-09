@@ -46,19 +46,19 @@
             <hr>
 
             <h5 class="mb-4">{{ $t('message.workExperience') }}</h5>
-            <div v-for="experience in profile.experiences" :key="experience.ID" class="content-container">
+            <div v-for="experience in profile.experiences" :key="experience.ID" class="content-container split">
               <h6>{{ experience.title }} | {{ experience.company }}</h6>
-              <p>{{ experience.from_period }} - {{ experience.to_period }}</p>
+              <p>{{ experience.from_period }}  <b class="mx-2">-</b>  {{ experience.to_period }}</p>
               <p>{{ experience.description }}</p>
             </div>
 
             <hr>
 
             <h5 class="mb-4">{{ $t('message.education_level') }}</h5>
-            <div v-for="education in profile.educations" :key="education.ID" class="content-container">
+            <div v-for="education in profile.educations" :key="education.ID" class="content-container split">
               <h6>{{ getEducationLevel(education.education_level) }} | {{ education.venue_of_education }}</h6>
               <p>Major: {{ education.major }}</p>
-              <p>{{ education.from_period }} - {{ education.to_period }}</p>
+              <p>{{ education.from_period }} <b class="mx-2">-</b> {{ education.to_period }}</p>
               <p>{{ education.description }}</p>
             </div>
         </div>
