@@ -27,7 +27,7 @@
                 <!-- You may need a way to get the actual bids, placeholder for now -->
                 <div class="icon-container"><i class="fas fa-comments-dollar"></i></div>
                 <b>{{ $t('message.bids') }}: </b>
-                <p class="ms-1">5</p>
+                <p class="ms-1"></p>
             </div>
             <div class="budget-container budget mt-1">
                 <div class="icon-container"><i class="fas fa-comment-dollar"></i></div>
@@ -245,6 +245,7 @@ export default defineComponent({
       }
       if (project.value?.user_id !== store.state.user_id) {
         fetchUserBid();
+        bidAmount.value = Number(project.value?.budget)
       }
       else{
         fetchBidsForProject();
