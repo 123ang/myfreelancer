@@ -19,9 +19,9 @@
       <div :class="{'language-container': true, active: isLanguageActive}" @click="toggleLanguage">
         <div class="language-icon"><i class="bi bi-translate"></i></div>
         <div class="language-box">
-          <div class="language-option active" @click="changeLanguage('en')">English</div>
-          <div class="language-option" @click="changeLanguage('bm')">Bahasa Melayu</div>
-          <div class="language-option" @click="changeLanguage('cn')">中文</div>
+          <div :class="{'language-option':true, active:currentLang == 'en'}" @click="changeLanguage('en')">English</div>
+          <div :class="{'language-option':true, active:currentLang == 'bm'}" @click="changeLanguage('bm')">Bahasa Melayu</div>
+          <div :class="{'language-option':true, active:currentLang == 'cn'}" @click="changeLanguage('cn')">中文</div>
         </div>
       </div>
       <div class="mobile-menu" @click="toggleMenu"><i class="fas fa-bars"></i></div>
@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed  } from 'vue';
+import { defineComponent, ref, computed, onMounted  } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { i18n } from "@/main";
@@ -45,6 +45,7 @@ export default defineComponent({
     const router = useRouter();
     const dynamicComponent = ref('div');
     const forceUpdate = ref(0);
+    const currentLang = ref<String>('en');
     const toggleLanguage = (e: MouseEvent): void => {
       e.stopPropagation();
       isLanguageActive.value = !isLanguageActive.value;
@@ -67,12 +68,16 @@ export default defineComponent({
     };
 
     const changeLanguage = (lang: string): void => {
-    
-
       store.commit('Language', lang);
       (i18n as any).global.locale = lang;
       window.location.reload();
     };
+
+    onMounted(()=>{
+      // check and update current language in language box
+      currentLang.value = store.state.language;
+    })
+    
   
     return {
       isLanguageActive,
@@ -83,7 +88,8 @@ export default defineComponent({
       logout,
       isLogin,
       changeLanguage,
-      dynamicComponent
+      dynamicComponent,
+      currentLang
     };
   }
 });

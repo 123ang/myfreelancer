@@ -32,7 +32,6 @@
                             </div>
                         </div>
 
-
                         <span class="preview-skill-container">
                             <div 
                                 class="skill-bar" 

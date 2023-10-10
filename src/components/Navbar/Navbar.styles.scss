@@ -166,10 +166,15 @@
                     width: 100%;
                     min-width: max-content;
                     text-align: center;
+                    transition: background .2s;
 
                     &.active{
                         background-color: $main-1;
                         color: #fff;
+                    }
+
+                    &:hover{
+                        background-color: $main-3;
                     }
                 }
             }
