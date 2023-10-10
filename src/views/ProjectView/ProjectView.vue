@@ -63,8 +63,8 @@
                               </div>
                           </td>
                           <td>
-                            <div v-if="bid.status == 2"><i class="fas fa-check-circle accept"></i></div>
-                            <div v-if="bid.status == 3"><i class="fas fa-times-circle reject"></i></div>
+                            <div v-if="bid.status == 2" class="icon-container"><i class="fas fa-check-circle accept"></i></div>
+                            <div v-if="bid.status == 3" class="icon-container"><i class="fas fa-times-circle reject"></i></div>
                           </td>
                       </tr>
                   </tbody>
