@@ -42,7 +42,7 @@
                     <hr class="my-3 mt-auto">
                     <!-- Price -->
                     <div class="d-flex mb-3">
-                        <p> Price : </p>
+                        <p>{{ $t('message.price') }} : </p>
                         <div class="ms-2 d-flex">
                             <p>RM</p>
                             <p>{{ project.budget }}</p>  <!-- Assuming projects have a price attribute -->
@@ -50,13 +50,13 @@
                     </div>
                     <!-- Bids -->
                     <div class="d-flex mb-3">
-                        <p> Bids : </p>
-                        <div class="ms-2 d-flex">{{ project.bids.length }}</div>
+                        <p> {{ $t('message.bids') }} : </p>
+                        <div class="ms-2 d-flex">{{ project.bids_count }}</div>
                     </div>
                     
                     <div class="button-container my-3">
                         <a :href="`/project/${project.ID}`">
-                            <button>View</button>
+                            <button>{{ $t('message.view') }}</button>
                         </a>
                     </div>
                 </div>
@@ -86,14 +86,11 @@ interface Project {
   updated_at: string;
   updated_by: number | null;
   category_id: number;
-  bids: Bid[];
+  bids_count: number;
   project_skills: ProjectSkill[];
   category: Category;
 }
 
-interface Bid {
-  // Depending on the fields in your bids data, populate accordingly
-}
 
 interface ProjectSkill {
   ID: number;

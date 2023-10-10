@@ -56,7 +56,7 @@
   </div>
 
   <!-- closed project -->
-  <div id="closed-project" class="body-section">
+  <div v-if="closedProjects.length > 0" id="closed-project" class="body-section" >
     <div class="container" >
       <div class="my-5"><h2>Closed Projects</h2></div>
         <hr>
@@ -64,12 +64,12 @@
             <div class="projects-container grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-4">
 
                 <!-- Loop through projects and display them -->
-                <div v-for="project in projects" :key="project.ID" class="card-container">
+                <div v-for="close_project in closedProjects" :key="close_project.ID" class="card-container">
                     <div class="card">
-                        <h4> {{ project.title }} </h4>
+                        <h4> {{ close_project.title }} </h4>
                         <div class="skill-container">
                             <!-- Loop through skills for each project -->
-                            <small v-for="skill in project.project_skills" :key="skill.ID" class="badge">
+                            <small v-for="skill in close_project.project_skills" :key="skill.ID" class="badge">
                                 {{ skill.skill_name }}
                             </small>
                         </div>
@@ -79,7 +79,7 @@
                             <p>{{ $t('message.price') }}: </p>
                             <div class="ms-2 d-flex">
                                 <p>RM</p>
-                                <p>{{ project.budget }}</p>
+                                <p>{{ close_project.budget }}</p>
                             </div>
                         </div>
                         <!-- Bids (you may need to adjust according to your data structure) -->
@@ -89,7 +89,7 @@
                         </div>
                         <!-- Buttons (adjust href as needed) -->
                         <div class="button-container my-3 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <a :href="'/project/' + project.ID" class="button view">{{ $t('message.view') }}</a>                       
+                            <a :href="'/project/' + close_project.ID" class="button view">{{ $t('message.view') }}</a>                       
                         </div>
                     </div>  
                 </div>    
@@ -148,6 +148,7 @@ export default defineComponent({
   name: 'MyProject',
   setup() {
     const projects = ref<Project[]>([]);
+    const closedProjects = ref<Project[]>([]);
     const store = useStore();
     const apiUrl = store.state.host_url + "my_project";
     const { t } = useI18n();
@@ -164,6 +165,19 @@ export default defineComponent({
       }
     };
     
+    const fetchClosedProjects = async () => {
+
+      try {
+        const response = await axios.post(store.state.host_url + "my_closed_projects", {
+          user_id: store.state.user_id
+        });
+
+        closedProjects.value = response.data;
+
+      } catch (error) {
+        console.error("Error fetching closed projects:", error);
+      }
+    };
 
     const closeProject = async (projectId: number) => {
       try {
@@ -207,10 +221,15 @@ export default defineComponent({
       }
     };
 
-    onMounted(fetchProjects);
+    onMounted(() => {
+      fetchProjects();
+      fetchClosedProjects();  
+    });
+
     return {
       projects,
       closeProject,
+      closedProjects, 
       deleteProject
     }
   }

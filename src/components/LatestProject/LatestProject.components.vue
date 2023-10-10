@@ -23,7 +23,7 @@
 
               <!-- VIEW MORE CARD -->
               <div class="card-container view-more">
-                <a href="/all-projects">
+                <a href="/projects">
                   <div class="card">
                     <div class="button">
                       <h4>{{$t('message.viewMore')}}</h4>

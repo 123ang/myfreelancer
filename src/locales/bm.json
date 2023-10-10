@@ -121,7 +121,19 @@
         "project_closed": "Projek anda telah ditutup.",
         "project_deleted": "Projek anda telah dipadam.",
         "closeProjectError": "Terdapat ralat menutup projek.",
-        "deleteProjectError": "Terdapat ralat memadam projek."
+        "deleteProjectError": "Terdapat ralat memadam projek.",
+        "noSkill": "Tiada Keperluan Kemahiran",
+        "viewDetails": "LIHAT BUTIRAN",
+        "type_freelancer_name": "Nama Pekerja Bebas",
+        "skill": "Kemahiran",
+        "all": "Semua",
+        "search": "Cari",
+        "hourlyRate": "Kadar Sejam",
+        "action": "Tindakan",
+        "status": "Status",
+        "biddingList": "Senarai Tawaran",
+        "yourBids": "Tawaran Anda (RM) :",
+        "cancel": "Batal"
 
 
     }

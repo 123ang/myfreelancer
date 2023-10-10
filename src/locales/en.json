@@ -129,7 +129,11 @@
         "skill": "Skill",
         "all": "All",
         "search": "Search",
-        "hourlyRate": "Hourly Rate"
-
+        "hourlyRate": "Hourly Rate",
+        "action": "Action",
+        "status": "Status",
+        "biddingList": "Bidding List",
+        "yourBids": "Your bids (RM) :",
+        "cancel": "Cancel"
     }
 }

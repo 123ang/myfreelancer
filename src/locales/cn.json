@@ -121,7 +121,19 @@
         "project_closed": "您的项目已被关闭。",
         "project_deleted": "您的项目已被删除。",
         "closeProjectError": "关闭项目时出错。",
-        "deleteProjectError": "删除项目时出错。"
+        "deleteProjectError": "删除项目时出错。",
+        "noSkill": "没有技能要求",
+        "viewDetails": "查看详细信息",
+        "type_freelancer_name": "自由职业者的名字",
+        "skill": "技能",
+        "all": "所有",
+        "search": "搜索",
+        "hourlyRate": "小时费率",
+        "action": "行动",
+        "status": "状态",
+        "biddingList": "投标列表",
+        "yourBids": "您的投标 (RM) :",
+        "cancel": "取消"
 
     }
 }

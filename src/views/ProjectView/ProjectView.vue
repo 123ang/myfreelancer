@@ -39,59 +39,56 @@
 
             <!-- bidding list -->
             <div class="bid-container" v-if="project.user_id === storeUserId">
-              <h5 class="mb-2">Bidding List</h5>
-                <table class="table table-striped">
+              <h5 class="mb-2">{{ $t('message.biddingList') }}</h5>
+              <table class="table table-striped">
                   <thead>
-                    <tr>
-                      <th scope="col" style="">#</th>
-                      <th scope="col" style="width: 100%">Name</th>
-                      <th scope="col" style="min-width: 180px">Bidding Price (RM)</th>
-                      <th scope="col">Action</th>
-                    </tr>
+                      <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">{{ $t('message.Name') }}</th>
+                          <th scope="col">{{ $t('message.price') }}</th>
+                          <th scope="col">{{ $t('message.action') }}</th>
+                          <th scope="col">{{ $t('message.status') }}</th>
+                      </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td><a href="#mark">Mark</a></td>
-                      <td>100.00</td>
-                      <td>
-                        <div class="flex gap-2 icon-container">
-                          <div><i class="fas fa-check-circle accept"></i></div>
-                          <div><i class="fas fa-times-circle reject"></i></div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td><a href="#Jacob">Jacob</a></td>
-                      <td>100.00</td>
-                      <td>
-                        <div class="flex gap-2 icon-container">
-                          <div><i class="fas fa-check-circle accept"></i></div>
-                          <div><i class="fas fa-times-circle reject"></i></div>
-                        </div>
-                      </td>
-                    </tr>
+                      <tr v-for="(bid, index) in bidsForProject" :key="bid.ID">
+                          <th scope="row">{{ index + 1 }}</th>
+                          <td><a :href="'/user/' + bid.user_id">{{ bid.user.name }}</a></td>
+                          <td>{{ bid.amount }}</td>
+                          <td>
+                              <div class="flex gap-2 icon-container">
+                                  <div @click="acceptBid(bid.ID)" v-if="bid.status == 1"><i class="fas fa-check-circle accept"></i></div>
+                                  <div @click="rejectBid(bid.ID)" v-if="bid.status == 1"><i class="fas fa-times-circle reject"></i></div>
+                                  <div><a :href="'/freelancer/' + bid.user_id"><i class="fas fa-eye view"></i></a></div>
+                              </div>
+                          </td>
+                          <td>
+                            <div v-if="bid.status == 2"><i class="fas fa-check-circle accept"></i></div>
+                            <div v-if="bid.status == 3"><i class="fas fa-times-circle reject"></i></div>
+                          </td>
+                      </tr>
                   </tbody>
-                </table>
+              </table>
             </div>
+
 
             <!-- Conditional bid button -->
             <div v-if="project.user_id !== storeUserId">
-              <div class="bidding-container" >
-                <label class="mb-2">Your bids (RM) : </label>                                          
+              <div class="bidding-container">
+                <label class="mb-2">{{ $t('message.yourBids') }}</label>                                          
                 <div class="input-container">
-                  <input type="number" >
-                  <button>Bids</button>
+                  <input v-model="bidAmount" type="number">
+                  <button @click="createOrUpdateBid">{{ $t('message.bids') }}</button>
                 </div>
               </div>
-              <div class="bidding-container text-center" >
+              <div class="bidding-container text-center" v-if="userBid">
                 <div class="cancel-container mb-2">
-                  <button class="bg-gray-400">Cancel</button>
+                  <button class="bg-red-400" @click="cancelBid">{{ $t('message.cancel') }}</button>
                 </div>
-                <label class="mb-2">Your bids (RM) : 100.00</label>                                          
+                <label class="mb-2">{{ $t('message.yourBids') }} {{ userBid.amount }}</label>                                        
               </div>
             </div>
+
         </div>     
 
         <div class="back-button">
@@ -134,12 +131,30 @@ interface Project {
   category_id: number;
   project_skills: ProjectSkill[];
 }
+interface User {
+    ID: number;
+    name: string;
+}
+
+interface Bid {
+    ID: number;
+    user_id: number;
+    project_id: number;
+    amount: string;  
+    notes: string | null;
+    created_at: string;
+    created_by: number;
+    updated_at: string;
+    updated_by: number;
+    status: number;
+    user: User;
+}
 
 export default defineComponent({
   name: 'ProjectView',
   props: {
     id: {
-      type: Number,
+      type: [Number, String],
       required: true
     }
   },
@@ -148,6 +163,79 @@ export default defineComponent({
     const store = useStore();
     const storeUserId = store.state.user_id; // Assuming you have user_id in your Vuex store
 
+    const bidAmount = ref<number | null>(null);
+    const userBid = ref<Bid | null>(null);
+    const bidsForProject = ref<Bid[]>([]); 
+    const fetchBidsForProject = async () => {
+            try {
+                const response = await axios.get(`${store.state.host_url}projects/${props.id}/bids`);
+                bidsForProject.value = response.data.bids;
+            } catch (error) {
+                console.error("Error fetching bids for project:", error);
+            }
+        };
+
+    const acceptBid = async (bidId: number) => {
+        try {
+            await axios.post(`${store.state.host_url}bid/accept`, {
+                bid_id: bidId,
+                user_id: store.state.user_id
+            });
+            fetchBidsForProject();  // refresh the bids list
+            alert("Bid accepted successfully!");
+        } catch (error) {
+            console.error("Error accepting bid:", error);
+        }
+    };
+
+    const rejectBid = async (bidId: number) => {
+        try {
+            await axios.post(`${store.state.host_url}bid/reject`, {
+                bid_id: bidId,
+                user_id: store.state.user_id
+            });
+            fetchBidsForProject();  // refresh the bids list
+            alert("Bid rejected successfully!");
+        } catch (error) {
+            console.error("Error rejecting bid:", error);
+        }
+    };
+    const createOrUpdateBid = async () => {
+      try {
+        const response = await axios.post(`${store.state.host_url}bid`, {
+          user_id: store.state.user_id,
+          project_id: props.id,
+          amount: bidAmount.value
+        });
+        console.log(bidAmount.value)
+        console.log(response.data)
+        fetchUserBid();
+      } catch (error) {
+        console.error("Error creating or updating bid:", error);
+      }
+    };
+
+    const cancelBid = async () => {
+      try {
+        await axios.post(`${store.state.host_url}bid/cancel`, {
+          user_id: store.state.user_id,
+          project_id: props.id
+        });
+        userBid.value = null;
+      } catch (error) {
+        console.error("Error cancelling bid:", error);
+      }
+    };
+
+    const fetchUserBid = async () => {
+      try {
+        const response = await axios.get(`${store.state.host_url}projects/${props.id}/bids/user/${store.state.user_id}`);
+        userBid.value = response.data.bid || null;
+      } catch (error) {
+        console.error("Error fetching user bid:", error);
+      }
+    };
+
     onMounted(async () => {
       try {
         const response = await axios.get(`${store.state.host_url}project/${props.id}`);
@@ -155,11 +243,24 @@ export default defineComponent({
       } catch (error) {
         console.error("Error fetching project:", error);
       }
+      if (project.value?.user_id !== store.state.user_id) {
+        fetchUserBid();
+      }
+      else{
+        fetchBidsForProject();
+      }
     });
 
     return {
       project,
-      storeUserId  // Making it available in the template
+      storeUserId,
+      bidAmount,
+      userBid,
+      createOrUpdateBid,
+      cancelBid,
+      bidsForProject,
+      acceptBid,
+      rejectBid
     };
   }
 });

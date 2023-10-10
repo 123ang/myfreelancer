@@ -75,7 +75,7 @@ export default defineComponent({
                     password: password.value
                 });
                 console.log(response.data)
-                if (response.data.message == 'Login successful!') {
+                if (response.data.message && response.data.message === 'Login successful!') {
                     store.commit('IsLogin', true);
                     store.commit('Username', response.data.user.email);  // Assuming that the response contains the email
                     store.commit('UserID', response.data.user.ID);  // Assuming that the response contains the user ID
@@ -91,6 +91,8 @@ export default defineComponent({
                         store.commit('RememberPassword', '');
                     }
                     router.push('/'); 
+                } else if(response.data.error) {
+                    alert(response.data.error); // This will show the specific error message
                 } else {
                     alert('Login failed!');
                 }
