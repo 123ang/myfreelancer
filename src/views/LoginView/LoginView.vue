@@ -6,12 +6,12 @@
             <div class="form-container">
                 <form @submit.prevent="handleLogin">
                     <div class="login-form-container">                  
-                        <label for="email">{{ $t('message.Email') }}</label>
+                        <label for="email">{{ $t('message.Email') }}:</label>
                         <input type="email" v-model="email" name="email" id="email" :placeholder="$t('message.Email')">
                     </div>
 
                     <div class="login-form-container">               
-                        <label for="password">{{ $t('message.Password') }}</label>
+                        <label for="password">{{ $t('message.Password') }}:</label>
                         <div class="password-input">
                             <input type="password" v-model="password" name="password" id="password" :placeholder="$t('message.Password')">
                         </div>

@@ -6,13 +6,13 @@
             <div class="form-container">
                 <form  @submit.prevent="registerUser">
                     <div class="login-form-container">                  
-                        <label for="text">{{ $t('message.Name') }}</label>
+                        <label for="text">{{ $t('message.Name') }}:</label>
                         <input type="text" name="name" id="name" :placeholder="$t('message.Name')" v-model="formData.name">
                     </div>
 
                     <div class="row login-form-container gy-5 gy-lg-0">
                         <div class="col-lg-6 px-0 px-lg-2">
-                            <label>{{ $t('message.Gender') }}</label>
+                            <label>{{ $t('message.Gender') }}:</label>
                             <div class="gender-checkbox">
                                 <input type="radio" name="gender" id="male" checked v-model="formData.gender">
                                 <label for="M" class="p-3">{{ $t('message.male') }}</label>
@@ -21,29 +21,29 @@
                             </div>
                         </div>
                         <div class="col-lg-6 px-0 px-lg-2">
-                            <label for="date_of_birth">{{ $t('message.Date of Birth') }}</label>
+                            <label for="date_of_birth">{{ $t('message.Date of Birth') }}:</label>
                             <input type="date" name="dob" id="date_of_birth" :placeholder="$t('message.Date of Birth')" v-model="formData.dob">
                         </div>
                     </div>
 
                     <div class="login-form-container row gy-5 gy-lg-0">
                         <div class="col-lg-6 px-0 px-lg-2">
-                            <label for="email">{{ $t('message.Email') }}</label>
+                            <label for="email">{{ $t('message.Email') }}:</label>
                             <input type="email" name="email" id="email" :placeholder="$t('message.Email')" v-model="formData.email">
                         </div>
                         <div class="col-lg-6 px-0 px-lg-2">
-                            <label for="phone">{{ $t('message.phone') }}</label>
+                            <label for="phone">{{ $t('message.phone') }}:</label>
                             <input type="tel" name="phone" id="phone" :placeholder="$t('message.phone')" v-model="formData.phone">
                         </div>
                     </div>
 
                     <div class="login-form-container">               
-                        <label for="password">{{ $t('message.Password') }}</label>
+                        <label for="password">{{ $t('message.Password') }}:</label>
                         <input type="password" name="password" id="password" :placeholder="$t('message.Password')" v-model="formData.password">
                     </div>
 
                     <div class="login-form-container">               
-                        <label for="password">{{ $t('message.Confirm Password') }}</label>
+                        <label for="password">{{ $t('message.Confirm Password') }}:</label>
                         <input type="password" name="confirm_password" id="confirm_password" :placeholder="$t('message.Confirm Password')" v-model="formData.confirm_password">
                     </div>
 

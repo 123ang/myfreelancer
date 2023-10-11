@@ -9,7 +9,7 @@
         <!-- personal info -->
         <div class="row">
           <div class="col-md-12">
-            <h4>{{ $t('message.Name') }}</h4>
+            <h4>{{ $t('message.Name') }}:</h4>
             <input type="text" name="name" id="name" :placeholder="$t('message.Name')" v-model="updatedName">
           </div>
 
@@ -19,25 +19,25 @@
           </div>
 
           <div class="col-md-6">
-            <h4>{{ $t('message.Email') }}</h4>
+            <h4>{{ $t('message.Email') }}:</h4>
             <p>{{ userProfile.email }}</p>
           </div>
           
           <div class="col-md-6">
-            <h4>Password:</h4>
+            <h4>{{ $t('message.Password') }}:</h4>
             <p>
               <a class="change-password" href="/change-password">Change Password</a>
             </p>
           </div>
          
           <div class="col-md-6">
-            <h4>{{ $t('message.Gender') }}</h4>
+            <h4>{{ $t('message.Gender') }}:</h4>
             <p>{{ userProfile.gender === 'M' ? $t('message.male') : userProfile.gender === 'F' ? $t('message.female') : userProfile.gender }}</p>
           </div>
 
 
           <div class="col-md-6">
-            <h4>{{ $t('message.Date of Birth') }}</h4>
+            <h4>{{ $t('message.Date of Birth') }}:</h4>
             <p>{{ userProfile.dob }}</p>
           </div>
         </div>
