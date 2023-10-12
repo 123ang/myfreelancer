@@ -102,7 +102,7 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useStore } from 'vuex';
-
+import { useRouter } from 'vue-router'; 
 interface ProjectSkill {
   ID: number;
   project_id: number;
@@ -136,6 +136,17 @@ interface User {
     name: string;
 }
 
+interface UserProfile{
+  name: string;
+  phone: string;
+  email: string;
+  gender: string;
+  dob: string;
+  year_experience: number;
+  wage_per_hour:number;
+  cover_note:string;
+}
+
 interface Bid {
     ID: number;
     user_id: number;
@@ -160,9 +171,10 @@ export default defineComponent({
   },
   setup(props) {
     const project = ref<Project | null>(null);
+    const user_profile = ref<UserProfile | null>(null);
     const store = useStore();
     const storeUserId = store.state.user_id; // Assuming you have user_id in your Vuex store
-
+    const router = useRouter();
     const bidAmount = ref<number | null>(null);
     const userBid = ref<Bid | null>(null);
     const bidsForProject = ref<Bid[]>([]); 
@@ -202,13 +214,18 @@ export default defineComponent({
     };
     const createOrUpdateBid = async () => {
       try {
+        console.log(user_profile.value)
+        if(user_profile.value?.wage_per_hour == null || user_profile.value?.year_experience == null ){
+          alert("Please fill up your year of experience and wage per hour in the accout profile");
+          router.push('/my-account'); 
+          return;
+        }
         const response = await axios.post(`${store.state.host_url}bid`, {
           user_id: store.state.user_id,
           project_id: props.id,
           amount: bidAmount.value
         });
-        console.log(bidAmount.value)
-        console.log(response.data)
+
         fetchUserBid();
       } catch (error) {
         console.error("Error creating or updating bid:", error);
@@ -231,6 +248,8 @@ export default defineComponent({
       try {
         const response = await axios.get(`${store.state.host_url}projects/${props.id}/bids/user/${store.state.user_id}`);
         userBid.value = response.data.bid || null;
+        user_profile.value = response.data.user || null;
+        console.log(response.data)
       } catch (error) {
         console.error("Error fetching user bid:", error);
       }
