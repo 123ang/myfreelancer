@@ -188,7 +188,7 @@
             <h4>{{ $t('message.others') }}</h4>
 
             <div class="optional-container mb-1 mt-4 ms-2">
-              <div v-if="userProfile && userProfile.year_experience !== null">
+              <div>
                   <h5>{{ $t('message.yearExperience') }}:</h5>
                   <p>
                       {{ userProfile.year_experience ?? ""}} 
