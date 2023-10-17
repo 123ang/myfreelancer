@@ -94,7 +94,7 @@
         "rateSkill": "* 请对您的技能等级进行1至5的评价",
         "save": "保存",
         "expertiseSkills": "专业技能",
-        "noSkillsAdded": "尚未添加技能",
+        "noSkillsInfo": "没有技能信息。",
         "edit": "编辑",
         "workExperience": "工作经验",
         "remove": "移除",

@@ -69,7 +69,7 @@
               </div>
             </div>
 
-            <p class="mb-0" v-else>{{ $t('message.NoSkillsAddedYet') }}</p>
+            <p class="mb-0" v-else>{{ $t('message.noSkillsInfo') }}</p>
 
           </div>
           <div class="col-3 col-md-2 add-button-container">

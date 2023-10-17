@@ -95,7 +95,7 @@
         "rateSkill": "* Rate your skill level from 1 to 5",
         "save": "Save",
         "expertiseSkills": "Expertise Skills",
-        "noSkillsAdded": "No skills added yet",
+        "noSkillsInfo": "No skills information",
         "edit": "Edit",
         "workExperience": "Work Experience",
         "remove": "Remove",
@@ -134,6 +134,7 @@
         "status": "Status",
         "biddingList": "Bidding List",
         "yourBids": "Your bids (RM) :",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+      
     }
 }
