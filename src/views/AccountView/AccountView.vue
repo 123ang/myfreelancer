@@ -188,7 +188,7 @@
             <h4>{{ $t('message.others') }}</h4>
 
             <div class="optional-container mb-1 mt-4 ms-2">
-              <div>
+              <div class="mb-4">
                   <h5>{{ $t('message.yearExperience') }}:</h5>
                   <p>
                       {{ userProfile.year_experience ?? ""}} 
@@ -200,12 +200,20 @@
                 <h5>{{ $t('message.expectedPayment') }}: (RM / {{ $t('message.hour') }}) </h5>
                 <p>  {{ userProfile.wage_per_hour ?? ""}} </p>
               </div>
-            </div>
-            <div class="mb-4">
-              <h5>{{ $t('message.coverNotesOptional') }}:</h5>
-              <p> {{ userProfile.cover_note ?? ""}} </p>
+              
+              <div class="mb-4">
+                <h5>Portfolio:</h5>
+                <p></p>
+              </div>
+
+              <div class="mb-4">
+                <h5>{{ $t('message.coverNotesOptional') }}:</h5>
+                <p> {{ userProfile.cover_note ?? ""}} </p>
+              </div>
+
             </div>
           </div>
+          
           <div class="col-3 col-md-2 add-button-container">
             <a  class="add-button" href="/edit-others" v-if="isAddedOthers">
               <button type="button">{{ $t('message.edit') }}</button>

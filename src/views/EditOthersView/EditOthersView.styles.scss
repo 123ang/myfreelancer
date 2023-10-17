@@ -15,4 +15,19 @@
             background-color: $main-1 !important;
         }
     }
+
+    .payment-container{
+        display: flex;
+
+        select#currency{
+            border-radius: $radius-1 0 0 $radius-1;
+            width: fit-content;
+            min-width: 125px;
+            cursor: pointer;
+        }
+        input#expected-payment{
+            border-radius: 0 $radius-1 $radius-1 0;
+            border-left: 0;
+        }
+    }
 }

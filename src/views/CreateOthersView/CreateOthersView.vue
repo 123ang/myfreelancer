@@ -30,6 +30,16 @@
                                 </div>
                             </div>
 
+                            <!-- Portfolio -->
+                            <div class="col-12">
+                                <div class="input-container">
+                                    <div class="login-form-container">                  
+                                        <label for="portfolio">Portfolio (optional) :</label>
+                                        <input type="text" id="portfolio">
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Description -->
                             <div class="col-12">
                                 <div class="input-container">

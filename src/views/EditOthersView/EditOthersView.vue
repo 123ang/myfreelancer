@@ -24,7 +24,24 @@
                                 <div class="input-container">
                                     <div class="login-form-container">                  
                                         <label for="company-name">{{ $t('message.expectedPayment') }}: (RM / {{ $t('message.hour') }})</label>
-                                        <input type="number" min="10" v-model="expectedPayment">
+                                        <div class="payment-container">
+                                            <select name="currency" id="currency">
+                                                <option value="MYR" selected>MYR</option>
+                                                <option value="SGD">SGD</option>
+                                                <option value="USD">USD</option>
+                                            </select>
+                                            <input type="number" min="10" id="expected-payment" v-model="expectedPayment">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Portfolio -->
+                            <div class="col-12">
+                                <div class="input-container">
+                                    <div class="login-form-container">                  
+                                        <label for="portfolio">Portfolio (optional) :</label>
+                                        <input type="text" id="portfolio">
                                     </div>
                                 </div>
                             </div>
