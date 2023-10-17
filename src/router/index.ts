@@ -107,9 +107,10 @@ const routes: Array<RouteRecordRaw> = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/edit-project',
+    path: '/edit-project/:id',
     name: 'edit-project',
     component: EditProjectView,
+    props: true,
     meta: { requiresAuth: true }
   },
   {

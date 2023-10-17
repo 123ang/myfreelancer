@@ -4,7 +4,7 @@
         <div class="card">
             <a class="back-button" href="javascript:history.back()"><i class="fas fa-chevron-left me-2"></i>Back</a>
 
-            <h2>{{ $t('message.Create Project') }}</h2>
+            <h2>{{ $t('message.Edit Project') }}</h2>
             <hr>
             <!-- title -->
             <div class="input-container">
@@ -69,7 +69,7 @@
               </div>
             </div>
             <div class="submit-button">
-              <button @click="submitProject">Save Changes</button>
+              <button @click="updateProject">Save Changes</button>
             </div>        
         </div>            
     </div>
@@ -82,14 +82,20 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'EditProjectView',
-  setup() {
+  props: {
+    id: {
+      type: [String, Number],
+      required: true
+    }
+  },
+  setup(props) {
     const store = useStore();
     const router = useRouter();
-
+    const route = useRoute();
     const BASE_URL = store.state.host_url;
     
     const allSkills = ref<Array<{ ID: number; name_eng: string }>>([]);
@@ -119,7 +125,23 @@ export default defineComponent({
         if (categoryResponse.data && Array.isArray(categoryResponse.data)) {
           categories.value = categoryResponse.data;
         }
+        const projectResponse = await axios.get(`${BASE_URL}project/${props.id}`);
+        if (projectResponse.data) {
+          const project = projectResponse.data.project;
+          projectTitle.value = project.title;
+          projectDescription.value = project.description;
+          projectBudget.value = project.budget;
+          selectedCategory.value = project.category_id;
+          if (project.project_skills && Array.isArray(project.project_skills)) {
+              skillSet.value = project.project_skills.map((skill: any) => skill.skill_name);
+          }
 
+          personInChargeName.value = project.pic_name;
+          personInChargePhone.value = project.pic_phone;
+          personInChargeEmail.value = project.pic_email;
+
+        }
+        console.log(projectResponse.data)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -155,14 +177,14 @@ export default defineComponent({
       skillSet.value.splice(index, 1);
     }
 
-    const submitProject = async () => {
+    const updateProject = async () => {
       try {
         const mappedSkills = skillSet.value.map(skillName => {
-            const foundSkill = allSkills.value.find(skill => skill.name_eng === skillName);
-            return {
-                id: foundSkill ? foundSkill.ID : null,
-                name: skillName
-            };
+          const foundSkill = allSkills.value.find(skill => skill.name_eng === skillName);
+          return {
+            id: foundSkill ? foundSkill.ID : null,
+            name: skillName
+          };
         });
 
         var data = {
@@ -179,21 +201,45 @@ export default defineComponent({
           }
         }
 
-        const response = await axios.post(BASE_URL + 'project', data);
-
-        if (response.status === 200 || response.status === 201) {
-          alert("Project created successfully");
+        const response = await axios.put(`${BASE_URL}project/${props.id}`, data);
+        console.log(data)
+        if (response.status === 200) {
+          alert("Project updated successfully");
           router.push("/my-project");
         }
         else {
-          alert("An error occurred while creating the project.");
+          alert("An error occurred while updating the project.");
         }
 
       } catch (error) {
+        const mappedSkills = skillSet.value.map(skillName => {
+          const foundSkill = allSkills.value.find(skill => skill.name_eng === skillName);
+          return {
+            id: foundSkill ? foundSkill.ID : null,
+            name: skillName
+          };
+        });
+
+        var data = {
+          title: projectTitle.value,
+          description: projectDescription.value,
+          budget: projectBudget.value,
+          category_id: selectedCategory.value,
+          skills: mappedSkills,
+          user_id: store.state.user_id,
+          person_in_charge: {
+            name: personInChargeName.value,
+            phone: personInChargePhone.value,
+            email: personInChargeEmail.value
+          }
+        }
+
         console.error("Error:", error);
-        alert("Failed to create the project. Please try again.");
+        console.log(data)
+        alert("Failed to update the project. Please try again.");
       }
     };
+
 
     return {
       skillSet,
@@ -211,7 +257,7 @@ export default defineComponent({
       personInChargeName,
       personInChargePhone,
       personInChargeEmail,
-      submitProject,
+      updateProject,
       categories
     }
   }

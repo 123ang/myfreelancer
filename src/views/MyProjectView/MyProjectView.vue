@@ -34,7 +34,7 @@
                         <div class="button-container my-3 grid grid-cols-1 md:grid-cols-2 gap-4">
                             <a :href="'/project/' + project.ID" class="button view">{{ $t('message.view') }}</a>
                             <!-- Add the actual links or methods for update, close, and delete -->
-                            <a href="/edit-project" class="button update">{{ $t('message.update') }}</a>
+                            <a :href="'/edit-project/' + project.ID"  class="button update">{{ $t('message.update') }}</a>
                             <a @click="closeProject(project.ID)" class="button close">{{ $t('message.close') }}</a>
                             <a @click="deleteProject(project.ID)" class="button delete">{{ $t('message.delete') }}</a>
                         </div>
