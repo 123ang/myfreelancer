@@ -125,7 +125,7 @@
           </div>
           <div class="col-3 col-md-2 add-button-container">
             <a  class="add-button" href="/create-experience">
-              <button type="button">Add</button>
+              <button type="button">{{ $t('message.add') }}</button>
             </a>         
           </div>
       </div>
@@ -175,7 +175,7 @@
         </div>
         <div class="col-3 col-md-2 add-button-container">
             <a  class="add-button" href="/create-education">
-              <button type="button">Add</button>
+              <button type="button">{{ $t('message.add') }}</button>
             </a>         
           </div>
     </div>
