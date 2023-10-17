@@ -133,8 +133,8 @@
         "status": "Status",
         "biddingList": "Senarai Tawaran",
         "yourBids": "Tawaran Anda (RM) :",
-        "cancel": "Batal"
-
+        "cancel": "Batal",
+        "Edit Project": "Sunting Project"
 
     }
 }

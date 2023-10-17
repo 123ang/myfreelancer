@@ -133,7 +133,7 @@
         "status": "状态",
         "biddingList": "投标列表",
         "yourBids": "您的投标 (RM) :",
-        "cancel": "取消"
-
+        "cancel": "取消",
+        "Edit Project": "编辑项目"
     }
 }
